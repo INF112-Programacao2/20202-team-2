@@ -23,3 +23,7 @@ O tema escolhido pelo grupo para a realização do trabalho foi um Sistema de Co
 	 - Caminhonete
 	 - Moto
  - Venda
+ - Estabelecimento
+ - Conta Bancária
+	 - Conta Bancária Pessoa Física
+	 - Conta Bancária Pessoa Jurídica
