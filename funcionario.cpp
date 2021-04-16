@@ -1,8 +1,3 @@
-// Universidade Federal de Viçosa - Ciência da Computação
-// Disciplina: INF112 - Programação II
-// Autor: José Júlio Alves Campolina
-// Número de Matrícula: 102022 
-
 #include "funcionario.h"
 
 Funcionario::Funcionario(std::string id, std::string nome, std::string cpf, std::string telefone, std::string endereco, double salario, std::string conta):
