@@ -1,4 +1,5 @@
 # Trabalho INF112 - Grupo 2
+
 Este projeto é referente a um trabalho da disciplina de Programação 2 (INF112) da Universidade Federal de Viçosa, ministrada pelo professor Julio Cesar Soares dos Reis. O objetivo é, através da linguagem C/C++, desenvolver e aplicar conceitos de programação aprendidos em aula.
 
 ## Integrantes
@@ -20,6 +21,6 @@ O tema escolhido pelo grupo para a realização do trabalho foi um Sistema de Co
 	 - Pessoa Jurídica
  - Veículo
 	 - Carro
-	 - Caminhonete
 	 - Moto
- - Venda
+- Venda
+- Estoque de Veículos
