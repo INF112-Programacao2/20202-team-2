@@ -6,7 +6,7 @@
 
 class Vendedor : public Funcionario {
     public:
-        Vendedor(std::string id, std::string nome, std::string cpf, std::string telefone, std::string endereco, double salario, std::string conta);
+        Vendedor(int id, std::string nome, std::string cpf, std::string telefone, std::string endereco, double salario, std::string conta);
 };
 
 #endif

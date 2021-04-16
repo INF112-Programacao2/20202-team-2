@@ -1,12 +1,11 @@
 #include "funcionario.h"
 
-Funcionario::Funcionario(std::string id, std::string nome, std::string cpf, std::string telefone, std::string endereco, double salario, std::string conta):
+Funcionario::Funcionario(int id, std::string nome, std::string cpf, std::string telefone, std::string endereco, double salario, std::string conta):
     _id(id), _nome(nome), _cpf(cpf), _telefone(telefone), _endereco(endereco), _salario(salario), _conta(conta) {}
 
-std::string Funcionario::get_id() {
+int Funcionario::get_id() {
     return _id;
 }
-
 
 std::string Funcionario::get_nome() {
     return _nome;

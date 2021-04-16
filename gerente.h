@@ -6,7 +6,7 @@
 
 class Gerente : public Funcionario {
     public:
-        Gerente(std::string id, std::string nome, std::string cpf, std::string telefone, std::string endereco, double salario, std::string conta);
+        Gerente(int id, std::string nome, std::string cpf, std::string telefone, std::string endereco, double salario, std::string conta);
 };
 
 #endif

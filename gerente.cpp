@@ -1,5 +1,5 @@
 #include "gerente.h"
 #include <string>
 
-Gerente::Gerente(std::string id, std::string nome, std::string cpf, std::string telefone, std::string endereco, double salario, std::string conta):
+Gerente::Gerente(int id, std::string nome, std::string cpf, std::string telefone, std::string endereco, double salario, std::string conta):
     Funcionario(id, nome, cpf, telefone, endereco, salario, conta) {}

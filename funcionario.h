@@ -7,7 +7,7 @@
 // class Produto: public ProdutoIF {
 class Funcionario {
     protected:
-        std::string _id;
+        int _id;
         std::string _nome;
         std::string _cpf;
         std::string _telefone;
@@ -15,9 +15,9 @@ class Funcionario {
         double _salario;
         std::string _conta;
     public:
-        Funcionario(std::string id, std::string nome, std::string cpf, std::string telefone, std::string endereco, double salario, std::string conta);
+        Funcionario(int id, std::string nome, std::string cpf, std::string telefone, std::string endereco, double salario, std::string conta);
         
-        std::string get_id();
+        int get_id();
         std::string get_nome();
         std::string get_cpf();
         std::string get_telefone();
