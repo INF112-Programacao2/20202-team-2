@@ -1,17 +1,18 @@
 #ifndef CLIENTEPJ_H
 #define CLIENTEPJ_H
-#include <string>
-#include "Cliente.h"
 
-using namespace std;
+#include <string>
+
+#include "cliente.h"
 
 class ClientePJ : public Cliente{
     private:
-        string cnpj;
+        std::string _cnpj;
 
     public:
-        void setCnpj(string);
-        string getCnpj();
+        std::string getCnpj();
+
+        void setCnpj(std::string cnpj);
 };
 
 #endif

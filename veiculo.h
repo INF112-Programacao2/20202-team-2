@@ -13,25 +13,26 @@ class Veiculo {
         std::string _cor;
         std::string _combustivel;
         int _preco;
+
     public:
         Veiculo(int id, std::string placa, int ano, std::string marca, std::string modelo, std::string cor, std::string combustivel, int preco);
         
-        int get_id();
-        std::string get_placa();
-        int get_ano();
-        std::string get_marca();
-        std::string get_modelo();
-        std::string get_cor();
-        std::string get_combustivel();
-        int get_preco();
+        int getId();
+        std::string getPlaca();
+        int getAno();
+        std::string getMarca();
+        std::string getModelo();
+        std::string getCor();
+        std::string getCombustivel();
+        int getPreco();
 
-        void set_placa(std::string placa);
-        void set_ano(int ano);
-        void set_marca(std::string marca);
-        void set_modelo(std::string modelo);
-        void set_cor(std::string cor);
-        void set_combustivel(std::string combustivel);
-        void set_preco(int preco);
+        void setPlaca(std::string placa);
+        void setAno(int ano);
+        void setMarca(std::string marca);
+        void setModelo(std::string modelo);
+        void setCor(std::string cor);
+        void setCombustivel(std::string combustivel);
+        void setPreco(int preco);
 };
 
 #endif

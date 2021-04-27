@@ -1,29 +1,28 @@
 #include <iostream>
-#include "ClientePF.h"
 #include <string>
 
-using namespace std;
+#include "clientepf.h"
 
-string ClientePF::getCpf(){
-  return this->cpf;
+std::string ClientePF::getCpf(){
+  return _cpf;
 }
 
-void ClientePF::setCpf(string cpf){
-  this->cpf = cpf;
+void ClientePF::setCpf(std::string cpf){
+  _cpf = cpf;
 }
 
-string ClientePF::getDataNasc(){
-  return this->dataNasc;
+std::string ClientePF::getDataNascimento(){
+  return _dataNascimento;
 }
 
-void ClientePF::setDataNasc(string dataNasc){
-  this->dataNasc = dataNasc;
+void ClientePF::setDataNascimento(std::string dataNascimento){
+  _dataNascimento = dataNascimento;
 }
 
-string ClientePF::getEstadoCivil(){
-  return this->estadoCivil;
+std::string ClientePF::getEstadoCivil(){
+  return _estadoCivil;
 }
 
-void ClientePF::setEstadoCivil(string estadoCivil){
-  this->cpf = estadoCivil;
+void ClientePF::setEstadoCivil(std::string estadoCivil){
+  _estadoCivil = estadoCivil;
 }

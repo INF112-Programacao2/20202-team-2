@@ -1,9 +1,9 @@
 #ifndef MOTO_H
 #define MOTO_H
 
-#include "veiculo.h"
 #include <string>
 
+#include "veiculo.h"
 class Moto : public Veiculo {
 	protected:
         std::string _tipoFreioDianteiro;
@@ -14,17 +14,17 @@ class Moto : public Veiculo {
     public:
         Moto(int id, std::string placa, int ano, std::string marca, std::string modelo, std::string cor, std::string combustivel, int preco, std::string tipoFreioDianteiro, std::string tipoFreioTraseiro, std::string tipoPartida, std::string injecaoEletCarb, int numCilindradas);
 
-        std::string get_tipoFreioDianteiro();
-        std::string get_tipoFreioTraseiro();
-        std::string get_tipoPartida();
-        std::string get_injecaoEletCarb();
-        int get_numCilindradas();
+        std::string getTipoFreioDianteiro();
+        std::string getTipoFreioTraseiro();
+        std::string getTipoPartida();
+        std::string getInjecaoEletCarb();
+        int getNumCilindradas();
 
-        void set_tipoFreioDianteiro(std::string tipoFreioDianteiro);
-        void set_tipoFreioTraseiro(std::string tipoFreioTraseiro);
-        void set_tipoPartida(std::string tipoPartida);
-        void set_injecaoEletCarb(std::string injecaoEletCarb);
-        void set_numCilindradas(int numCilindradas);
+        void setTipoFreioDianteiro(std::string tipoFreioDianteiro);
+        void setTipoFreioTraseiro(std::string tipoFreioTraseiro);
+        void setTipoPartida(std::string tipoPartida);
+        void setInjecaoEletCarb(std::string injecaoEletCarb);
+        void setNumCilindradas(int numCilindradas);
 };
 
 #endif

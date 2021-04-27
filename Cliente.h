@@ -1,25 +1,25 @@
 #ifndef CLIENTE_H
 #define CLIENTE_H
-#include <string>
 
-using namespace std;
+#include <string>
 
 class Cliente{
     protected:
-        int id;
-        string nome;
-        string telefone;
-        string endereco;
+        int _id;
+        std::string _nome;
+        std::string _telefone;
+        std::string _endereco;
 
     public:
-        void setNome(string);
-        string getNome();
-        void setId(int);
         int getId();
-        void setTelefone(string);
-        string getTelefone();
-        void setEndereco(string);
-        string getEndereco();
+        std::string getNome();
+        std::string getTelefone();
+        std::string getEndereco();
+        
+        void setId(int id);
+        void setNome(std::string nome);
+        void setTelefone(std::string telefone);
+        void setEndereco(std::string endereco);
 };
 
 #endif

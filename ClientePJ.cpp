@@ -1,13 +1,12 @@
 #include <iostream>
-#include "ClientePJ.h"
 #include <string>
 
-using namespace std;
+#include "clientepj.h"
 
-string ClientePJ::getCnpj(){
-  return this->cnpj;
+std::string ClientePJ::getCnpj(){
+  return _cnpj;
 }
 
-void ClientePJ::setCnpj(string cnpj){
-  this->cnpj = cnpj;
+void ClientePJ::setCnpj(std::string cnpj){
+  _cnpj = cnpj;
 }

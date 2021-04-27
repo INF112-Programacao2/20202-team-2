@@ -17,20 +17,21 @@ class Funcionario {
     public:
         Funcionario(int id, std::string nome, std::string cpf, std::string telefone, std::string endereco, double salario, std::string conta);
         
-        int get_id();
-        std::string get_nome();
-        std::string get_cpf();
-        std::string get_telefone();
-        std::string get_endereco();
-        double get_salario();
-        std::string get_conta();
+        int getId();
+        std::string getNome();
+        std::string getCpf();
+        std::string getTelefone();
+        std::string getEndereco();
+        double getSalario();
+        std::string getConta();
+        
+        void setNome(std::string nome);
+        void setCpf(std::string cpf);
+        void setTelefone(std::string telefone);
+        void setEndereco(std::string endereco);
+        void setSalario(double salario);
+        void setConta(std::string conta);
 
-        void set_nome(std::string nome);
-        void set_cpf(std::string cpf);
-        void set_telefone(std::string telefone);
-        void set_endereco(std::string endereco);
-        void set_salario(double salario);
-        void set_conta(std::string conta);
 };
 
 #endif

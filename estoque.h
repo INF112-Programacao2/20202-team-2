@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <vector>
+
 #include "veiculo.h"
 
 class Estoque {
@@ -13,12 +14,15 @@ protected:
 
 public:
 	Estoque(int capacidade);
+	
 	void adicionar(Veiculo veiculo);
 	void remover(Veiculo veiculo);
-	int get_num_veiculos();
-	int get_capacidade();
-	void set_capacidade(int cap);
 	void imprimir_estoque();
+
+	int getNumVeiculos();
+	int getCapacidade();
+	
+	void setCapacidade(int capacidade);
 };
 
 #endif

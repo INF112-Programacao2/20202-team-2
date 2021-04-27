@@ -1,37 +1,36 @@
 #include <iostream>
-#include "Cliente.h"
 #include <string>
 
-using namespace std;
+#include "cliente.h"
 
 int Cliente::getId(){
-  return this->id;
+  return _id;
 }
 
 void Cliente::setId(int id){
-  this->id = id;
+  _id = id;
 }
 
-string Cliente::getNome(){
-  return this->nome;
+std::string Cliente::getNome(){
+  return _nome;
 }
 
-void Cliente::setNome(string nome){
-  this->nome = nome;
+void Cliente::setNome(std::string nome){
+  _nome = nome;
 }
 
-string Cliente::getTelefone(){
-  return this->telefone;
+std::string Cliente::getTelefone(){
+  return _telefone;
 }
 
-void Cliente::setTelefone(string telefone){
-  this->telefone = telefone;
+void Cliente::setTelefone(std::string telefone){
+  _telefone = telefone;
 }
 
-string Cliente::getEndereco(){
-  return this->endereco;
+std::string Cliente::getEndereco(){
+  return _endereco;
 }
 
-void Cliente::setEndereco(string endereco){
-  this->endereco = endereco;
+void Cliente::setEndereco(std::string endereco){
+  _endereco = endereco;
 }
