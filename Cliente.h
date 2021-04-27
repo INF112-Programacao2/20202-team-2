@@ -11,6 +11,8 @@ class Cliente{
         std::string _endereco;
 
     public:
+        Cliente(int id, std::string nome, std::string telefone, std::string endereco);
+        
         int getId();
         std::string getNome();
         std::string getTelefone();

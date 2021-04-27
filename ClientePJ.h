@@ -10,6 +10,8 @@ class ClientePJ : public Cliente{
         std::string _cnpj;
 
     public:
+        ClientePJ(int id, std::string nome, std::string telefone, std::string endereco, std::string cnpj);
+        
         std::string getCnpj();
 
         void setCnpj(std::string cnpj);

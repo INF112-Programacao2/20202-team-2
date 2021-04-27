@@ -12,6 +12,8 @@ class ClientePF : public Cliente{
         std::string _estadoCivil;
 
     public:
+        ClientePF(int id, std::string nome, std::string telefone, std::string endereco, std::string cpf, std::string dataNascimento, std::string estadoCivil);
+        
         std::string getCpf();
         std::string getDataNascimento();
         std::string getEstadoCivil();
