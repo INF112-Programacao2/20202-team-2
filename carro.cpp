@@ -4,7 +4,7 @@
 
 Carro::Carro(int id, std::string placa, int ano, std::string marca, std::string modelo, std::string cor, std::string combustivel, int preco, int numPortas, bool arCondicionado, bool vidroEletrico, bool travasEletricas, std::string tipoDirecao):
     Veiculo(id, placa, ano, marca, modelo, cor, combustivel, preco), _numPortas(numPortas), _arCondicionado(arCondicionado), _vidroEletrico(vidroEletrico), _travasEletricas(travasEletricas), _tipoDirecao(tipoDirecao) {}
-
+ 
 int Carro::get_numPortas() {
     return _numPortas;
 }
