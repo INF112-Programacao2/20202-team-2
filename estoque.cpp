@@ -46,16 +46,7 @@ void Estoque::remover(Veiculo veiculo) {
 void Estoque::imprimir_estoque() {
 	for (int i=0; i<_num_veiculos_adicionados; i++)
 	{
-		std::cout << "------------------------------------------------------" << std::endl;
-		std::cout << "ID: " << _veiculos[i].getId() << std::endl;
-		std::cout << "Placa: " << _veiculos[i].getPlaca() << std::endl;
-		std::cout << "Ano: " << _veiculos[i].getAno() << std::endl;
-		std::cout << "Marca: " << _veiculos[i].getMarca() << std::endl;
-		std::cout << "Modelo: " << _veiculos[i].getModelo() << std::endl;
-		std::cout << "Cor: " << _veiculos[i].getCor() << std::endl;
-		std::cout << "Tipo de combustivel: " << _veiculos[i].getCombustivel() << std::endl;
-		std::cout << "Preco: " << _veiculos[i].getPreco() << std::endl;
-		std::cout << "------------------------------------------------------" << std::endl;
+		_veiculos[i].exibir_informacoes();
 	}
 	
 }

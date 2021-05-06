@@ -4,6 +4,7 @@
 #include <string>
 
 #include "veiculo.h"
+#include <iostream>
 
 class Carro : public Veiculo {
 	protected:
@@ -27,6 +28,7 @@ class Carro : public Veiculo {
         void set_vidroEletrico(bool vidroEletrico);
         void set_travasEletricas(bool travasEletricas);
         void set_tipoDirecao(std::string tipoDirecao);
+        virtual void exibir_informacoes() override;
 };
 
 #endif
