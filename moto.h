@@ -2,7 +2,7 @@
 #define MOTO_H
 
 #include <string>
-
+#include <iostream>
 #include "veiculo.h"
 class Moto : public Veiculo {
 	protected:
@@ -25,6 +25,7 @@ class Moto : public Veiculo {
         void setTipoPartida(std::string tipoPartida);
         void setInjecaoEletCarb(std::string injecaoEletCarb);
         void setNumCilindradas(int numCilindradas);
+        virtual void exibir_informacoes() override;
 };
 
 #endif

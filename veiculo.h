@@ -33,6 +33,7 @@ class Veiculo {
         void setCor(std::string cor);
         void setCombustivel(std::string combustivel);
         void setPreco(int preco);
+        virtual void exibir_informacoes();
 };
 
 #endif

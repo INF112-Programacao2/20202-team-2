@@ -44,3 +44,22 @@ int Moto::getNumCilindradas() {
 void Moto::setNumCilindradas(int numCilindradas) {
     _numCilindradas = numCilindradas;
 }
+
+void Moto::exibir_informacoes(){
+    	std::cout << "------------------------------------------------------" << std::endl;
+        std::cout << "Tipo: Motocicleta" << std::endl;
+		std::cout << "ID: " << Veiculo::getId() << std::endl;
+		std::cout << "Placa: " << Veiculo::getPlaca() << std::endl;
+		std::cout << "Ano: " << Veiculo::getAno() << std::endl;
+		std::cout << "Marca: " << Veiculo::getMarca() << std::endl;
+		std::cout << "Modelo: " << Veiculo::getModelo() << std::endl;
+		std::cout << "Cor: " << Veiculo::getCor() << std::endl;
+		std::cout << "Tipo de combustivel: " << Veiculo::getCombustivel() << std::endl;
+		std::cout << "Preco: " << Veiculo::getPreco() << std::endl;
+        std::cout << "Freio dianteiro: " << this->getTipoFreioDianteiro() << std::endl;
+        std::cout << "Freio traseiro: " << this->getTipoFreioTraseiro() << std::endl;
+        std::cout << "Partida: " << this->getTipoPartida() << std::endl;
+        std::cout << "Tipo de injeção: " << this->getInjecaoEletCarb() << std::endl;
+        std::cout << "Número de cilindradas: " << this-> getNumCilindradas() << std::endl;
+		std::cout << "------------------------------------------------------" << std::endl;
+}

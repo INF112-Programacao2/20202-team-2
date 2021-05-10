@@ -44,3 +44,25 @@ std::string Carro::get_tipoDirecao() {
 void Carro::set_tipoDirecao(std::string tipoDirecao) {
     _tipoDirecao = tipoDirecao;
 }
+
+void Carro::exibir_informacoes(){
+    	std::cout << "------------------------------------------------------" << std::endl;
+        std::cout << "Tipo: Carro" << std::endl;
+		std::cout << "ID: " << Veiculo::getId() << std::endl;
+		std::cout << "Placa: " << Veiculo::getPlaca() << std::endl;
+		std::cout << "Ano: " << Veiculo::getAno() << std::endl;
+		std::cout << "Marca: " << Veiculo::getMarca() << std::endl;
+		std::cout << "Modelo: " << Veiculo::getModelo() << std::endl;
+		std::cout << "Cor: " << Veiculo::getCor() << std::endl;
+		std::cout << "Tipo de combustivel: " << Veiculo::getCombustivel() << std::endl;
+		std::cout << "Preco: " << Veiculo::getPreco() << std::endl;
+        std::cout << "Número de portas: " << this->get_numPortas() << std::endl;
+        std::cout << "Ar condicionado: ";
+        this->get_arCondicionado() ? std::cout << "Sim" << std::endl : std::cout << "Não" << std::endl;
+        std::cout << "Vidros elétricos: ";
+        this->get_vidroEletrico() ? std::cout << "Sim" << std::endl : std::cout << "Não" << std::endl;
+        std::cout << "Travas elétricas: ";
+        this->get_travasEletricas() ? std::cout << "Sim" << std::endl : std::cout << "Não" << std::endl;  
+        std::cout << "Tipo de direção: " << this->get_tipoDirecao() << std::endl; 
+		std::cout << "------------------------------------------------------" << std::endl;
+}
