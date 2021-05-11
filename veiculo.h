@@ -2,6 +2,7 @@
 #define VEICULO_H
 
 #include <string>
+#include <iostream>
 
 class Veiculo {
     protected:
@@ -33,7 +34,7 @@ class Veiculo {
         void setCor(std::string cor);
         void setCombustivel(std::string combustivel);
         void setPreco(int preco);
-        virtual void exibir_informacoes();
+        virtual void exibir_informacoes() = 0;
 };
 
 #endif

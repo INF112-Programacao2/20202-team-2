@@ -10,13 +10,13 @@ class Estoque {
 protected:
 	int _capacidade;
 	int _num_veiculos_adicionados;
-	std::vector<Veiculo> _veiculos;
+	std::vector<Veiculo*> _veiculos;
 
 public:
 	Estoque(int capacidade);
 	
-	void adicionar(Veiculo veiculo);
-	void remover(Veiculo veiculo);
+	void adicionar(Veiculo *veiculo);
+	void remover(Veiculo *veiculo);
 	void imprimir_estoque();
 
 	int getNumVeiculos();

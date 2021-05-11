@@ -18,7 +18,7 @@ void Estoque::setCapacidade(int cap){
 	_capacidade = cap;
 }
 
-void Estoque::adicionar(Veiculo veiculo) {
+void Estoque::adicionar(Veiculo *veiculo) {
 	if (_num_veiculos_adicionados == _capacidade) 
 		std::cout << "Estoque cheio!" << std::endl;
 	else {
@@ -28,10 +28,10 @@ void Estoque::adicionar(Veiculo veiculo) {
 	}
 }
 
-void Estoque::remover(Veiculo veiculo) {
+void Estoque::remover(Veiculo *veiculo) {
 	for (int i=0; i<_num_veiculos_adicionados; i++)
 	{
-		if (_veiculos[i].getId() == veiculo.getId())
+		if (_veiculos[i]->getId() == veiculo->getId())
 		{
 			_veiculos.erase(_veiculos.begin()+i);
 			std::cout << "Veiculo removido com sucesso." << std::endl;
@@ -46,7 +46,6 @@ void Estoque::remover(Veiculo veiculo) {
 void Estoque::imprimir_estoque() {
 	for (int i=0; i<_num_veiculos_adicionados; i++)
 	{
-		_veiculos[i].exibir_informacoes();
+		_veiculos[i]->exibir_informacoes();
 	}
-	
 }

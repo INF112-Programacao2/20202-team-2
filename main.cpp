@@ -6,9 +6,18 @@
 #include "funcionario.h"
 #include "gerente.h"
 #include "vendedor.h"
+#include "veiculo.h"
+#include "carro.h"
+#include "moto.h"
+#include "estoque.h"
+#include "venda.h"
+#include "cliente.h"
+#include "ClientePF.h"
+#include "ClientePJ.h"
+
 
 int main() {
-
+    
     std::vector<Funcionario> funcionarios;
     std::vector<Gerente> gerentes;
     std::vector<Vendedor> vendedores;
