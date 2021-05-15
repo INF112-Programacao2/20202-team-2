@@ -61,5 +61,5 @@ void Moto::exibir_informacoes(){
         std::cout << "Partida: " << this->getTipoPartida() << std::endl;
         std::cout << "Tipo de injeção: " << this->getInjecaoEletCarb() << std::endl;
         std::cout << "Número de cilindradas: " << this-> getNumCilindradas() << std::endl;
-		std::cout << "------------------------------------------------------" << std::endl;
+		std::cout << std::endl;
 }

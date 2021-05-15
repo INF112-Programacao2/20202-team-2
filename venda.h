@@ -2,6 +2,7 @@
 #define VENDA_H
 
 #include <string>
+#include <fstream>
 
 #include "funcionario.h"
 #include "veiculo.h"
@@ -17,6 +18,8 @@ class Venda {
 		std::string _forma_pagamento;
 		double _valor_final;
 		std::string _obs;
+		std::ofstream _vendas;
+		
 
 	public:
 		Venda(Funcionario *funcionario_responsavel, Cliente *cliente_atendido, Veiculo *veiculo_vendido, std::string data, double desconto,
@@ -39,6 +42,7 @@ class Venda {
 		void set_forma_pagamento(std::string forma_pg);
 		void set_valor_final(double valor);
 		void set_obs(std::string o);
+		void salvar_venda();
 };
 
 #endif

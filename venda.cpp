@@ -39,6 +39,10 @@ double Venda::get_valor_final(){
 	return _valor_final;
 }
 
+std::string Venda::get_obs(){
+	return _obs;
+}
+
 void Venda::set_funcionario(Funcionario *f){
 	_funcionario_responsavel = f;
 }
@@ -69,4 +73,27 @@ void Venda::set_valor_final(double valor){
 
 void Venda::set_obs(std::string o){
 	_obs = o;
+}
+
+void Venda::salvar_venda(){
+	_vendas.open("relatorio de vendas.txt", std::ios::app);
+
+	if(!_vendas.is_open())
+	{
+		std::cout << "Erro ao salvar venda." << std::endl;
+		return;
+	}
+
+	_vendas << "Cliente: " << this->get_cliente()->getNome() << '\n';
+	_vendas << "Funcionário responsável: " << this->get_funcionario()->getNome() << '\n';
+	_vendas << "Marca e modelo do veículo: " << this->get_veiculo_vendido()->getMarca() << " " << this->get_veiculo_vendido()->getModelo() << '\n';
+	_vendas << "Valor final: " << this->get_valor_final() << '\n';
+	_vendas << "Forma de pagamento: " << this->get_forma_pagamento() << '\n';
+	_vendas << "Data: " << this->get_data() << '\n';
+	_vendas << "Observações: " << this->get_obs() << '\n';
+	_vendas << "--------------------------------------------" << '\n';
+
+	_vendas.close();
+
+	return;
 }

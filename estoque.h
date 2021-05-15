@@ -6,23 +6,25 @@
 
 #include "veiculo.h"
 
+struct Veiculos_Quantidade{
+	Veiculo *v;
+	int quantidade;
+};
+
 class Estoque {
 protected:
-	int _capacidade;
-	int _num_veiculos_adicionados;
-	std::vector<Veiculo*> _veiculos;
+	std::vector<Veiculos_Quantidade> _veiculos;
 
 public:
-	Estoque(int capacidade);
+	Estoque();
 	
-	void adicionar(Veiculo *veiculo);
-	void remover(Veiculo *veiculo);
+	void adicionar(Veiculo *veiculo, int quantidade);
+	void remover(Veiculo *veiculo, int quantidade);
+	void remover(int id);
 	void imprimir_estoque();
-
+	void procurar(int id);
+	void procurar(std::string modelo);
 	int getNumVeiculos();
-	int getCapacidade();
-	
-	void setCapacidade(int capacidade);
-};
+	};
 
 #endif

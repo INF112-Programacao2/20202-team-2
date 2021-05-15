@@ -64,5 +64,5 @@ void Carro::exibir_informacoes(){
         std::cout << "Travas elétricas: ";
         this->get_travasEletricas() ? std::cout << "Sim" << std::endl : std::cout << "Não" << std::endl;  
         std::cout << "Tipo de direção: " << this->get_tipoDirecao() << std::endl; 
-		std::cout << "------------------------------------------------------" << std::endl;
+		std::cout << std::endl;
 }

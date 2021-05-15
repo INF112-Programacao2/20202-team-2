@@ -1,51 +1,96 @@
 #include "estoque.h"
 
-Estoque::Estoque (int capacidade) {
-    
-	_capacidade = capacidade;
-	_num_veiculos_adicionados = 0;
+Estoque::Estoque () {
 }
 
 int Estoque::getNumVeiculos(){
-	return _num_veiculos_adicionados;
+	return _veiculos.size();
 }
 
-int Estoque::getCapacidade(){
-	return _capacidade;
+void Estoque::adicionar(Veiculo *veiculo, int qntd) {
+	Veiculos_Quantidade vehicle;
+	vehicle.v = veiculo;
+	vehicle.quantidade = qntd;
+
+	_veiculos.push_back(vehicle);
+	std::cout << "Veículo(s) adicionado(s) com sucesso ao estoque." << std::endl;
 }
 
-void Estoque::setCapacidade(int cap){
-	_capacidade = cap;
-}
+void Estoque::remover(Veiculo *veiculo, int qntd) {
+	for (int i=0; i<_veiculos.size(); i++)
+	{
+		if (_veiculos[i].v->getId() == veiculo->getId())
+		{
+			if(_veiculos[i].quantidade <= qntd)
+				_veiculos.erase(_veiculos.begin()+i);
+			else
+				_veiculos[i].quantidade -= qntd;
 
-void Estoque::adicionar(Veiculo *veiculo) {
-	if (_num_veiculos_adicionados == _capacidade) 
-		std::cout << "Estoque cheio!" << std::endl;
-	else {
-		_veiculos.push_back(veiculo);
-		std::cout << "Veiculo adicionado com sucesso ao estoque." << std::endl;
-		_num_veiculos_adicionados++;
+			std::cout << "Veículo(s) removido(s) com sucesso do estoque." << std::endl;
+
+			break;
+		}
+		if (i==_veiculos.size()-1)
+			std::cout << "Este veículo não está no estoque." << std::endl;
 	}
 }
 
-void Estoque::remover(Veiculo *veiculo) {
-	for (int i=0; i<_num_veiculos_adicionados; i++)
+void Estoque::remover(int id) {
+	for (int i=0; i<_veiculos.size(); i++)
 	{
-		if (_veiculos[i]->getId() == veiculo->getId())
+		if (_veiculos[i].v->getId() == id)
 		{
 			_veiculos.erase(_veiculos.begin()+i);
-			std::cout << "Veiculo removido com sucesso." << std::endl;
-			_num_veiculos_adicionados--;
+			std::cout << "Veiculo(s) removido(s) com sucesso do estoque." << std::endl;
 			break;
 		}
-		if (i==_num_veiculos_adicionados-1)
-			std::cout << "Este veiculo nao esta no estoque." << std::endl;
+		if (i==_veiculos.size()-1)
+			std::cout << "Não existe(m) veículo(s) com esse id no estoque." << std::endl;
+	}
+}
+
+void Estoque::procurar(int id){
+	for (int i=0; i<_veiculos.size(); i++)
+	{
+		if (_veiculos[i].v->getId() == id)
+		{
+			_veiculos[i].v->exibir_informacoes();
+			std::cout << "Quantidade em estoque: " << _veiculos[i].quantidade << std::endl;
+			std::cout << "------------------------------------------------------" << std::endl;
+			break;
+		}
+		if (i==_veiculos.size()-1)
+			std::cout << "Não existe(m) veículo(s) com esse id no estoque." << std::endl;
+	}
+}
+
+void Estoque::procurar(std::string modelo){
+	bool tem = false;
+
+	for (int i=0; i<_veiculos.size(); i++)
+	{
+		if (_veiculos[i].v->getModelo() == modelo)
+		{
+			_veiculos[i].v->exibir_informacoes();
+			std::cout << "Quantidade em estoque: " << _veiculos[i].quantidade << std::endl;
+			std::cout << "------------------------------------------------------" << std::endl;
+			tem = true;
+		}
+		if (i==_veiculos.size()-1 && tem == false)
+			std::cout << "Nenhum veículo localizado com o modelo '" << modelo << "'." << std::endl;
 	}
 }
 
 void Estoque::imprimir_estoque() {
-	for (int i=0; i<_num_veiculos_adicionados; i++)
+	if (_veiculos.size() == 0)
+		std::cout << "Estoque vazio." << std::endl;
+	else
 	{
-		_veiculos[i]->exibir_informacoes();
+		for (int i=0; i<_veiculos.size(); i++)
+		{
+			_veiculos[i].v->exibir_informacoes();
+			std::cout << "Quantidade em estoque: " << _veiculos[i].quantidade << std::endl;
+			std::cout << "------------------------------------------------------" << std::endl;
+		}
 	}
 }
