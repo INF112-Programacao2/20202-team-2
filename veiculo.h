@@ -17,7 +17,8 @@ class Veiculo {
 
     public:
         Veiculo(int id, std::string placa, int ano, std::string marca, std::string modelo, std::string cor, std::string combustivel, int preco);
-        
+        virtual ~Veiculo() {};
+
         int getId();
         std::string getPlaca();
         int getAno();

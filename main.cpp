@@ -37,139 +37,13 @@ int main() {
     venda1.salvar_venda();
     venda2.salvar_venda();
 
-    delete v1,v2,v3,v4,f,c;
+    delete v1;
+    delete v2;
+    delete v3;
+    delete v4;
+    delete f;
+    delete c;
 
-    int opcao;
-    do{
-
-        std::cout << "===Gerenciamento de Estoque==" << std::endl;
-        std::cout << "1 - Ver estoque" << std::endl;
-        std::cout << "2 - Adicionar veiculo" << std::endl;
-        std::cout << "3 - Remover veiculo" << std::endl;
-        std::cout << "4 - Procurar veiculo" << std::endl;
-        std::cout << "0 - Sair" << std::endl;
-
-        std::cin >> opcao;
-
-        switch(opcao) {
-            case 1:
-                estoque.imprimir_estoque();
-                break;
-            case 2:
-                std::cout << "Carro (0) ou Moto (1)?" << std::endl;
-                int tipo;
-                std::cin >> tipo;
-                if (tipo == 0)
-                {
-                    int id, ano, preco, nportas, quantidade;
-                    std::string placa, marca, modelo, cor, combustivel, tdirecao;
-                    bool ac,ve,te;
-
-                    id = estoque.getNumVeiculos();
-                    std::cout << "Quantidade: ";
-                    std::cin >> quantidade;
-                    std::cout << "Ano: ";
-                    std::cin >> ano;
-                    std::cout << "Preço: ";
-                    std::cin >> preco;
-                    std::cout << "Marca: ";
-                    std::cin >> marca;
-                    std::cout << "Modelo: ";
-                    std::cin >> modelo;
-                    std::cout << "Número de portas: ";
-                    std::cin >> nportas;
-                    std::cout << "Cor: ";
-                    std::cin >> cor;
-                    std::cout << "Placa: ";
-                    std::cin >> placa;
-                    std::cout << "Combustível: ";
-                    std::cin >> combustivel;
-                    std::cout << "Tipo de direção: ";
-                    std::cin >> tdirecao;
-                    std::cout << "Ar condicionado?(0/1): ";
-                    std::cin >> ac;
-                    std::cout << "Travas elétricas? (0/1): ";
-                    std::cin >> te;
-                    std::cout << "Vidros elétricos? (0/1): ";
-                    std::cin >> ve;
-                    
-                    Veiculo *v = new Carro(id, placa, ano, marca, modelo, cor, combustivel, preco, nportas, ac, ve, te, tdirecao);
-                    estoque.adicionar(v, quantidade);
-                }
-                else
-                {
-                    int id, ano, preco, cilindradas, quantidade;
-                    std::string placa, marca, modelo, cor, combustivel, fd, ft, partida, injecao;
-
-                    id = estoque.getNumVeiculos();
-                    
-                    std::cout << "Quantidade: ";
-                    std::cin >> quantidade;
-                    std::cout << "Ano: ";
-                    std::cin >> ano;
-                    std::cout << "Preço: ";
-                    std::cin >> preco;
-                    std::cout << "Marca: ";
-                    std::cin >> marca;
-                    std::cout << "Modelo: ";
-                    std::cin >> modelo;
-                    std::cout << "Número de cilindradas: ";
-                    std::cin >> cilindradas;
-                    std::cout << "Cor: ";
-                    std::cin >> cor;
-                    std::cout << "Placa: ";
-                    std::cin >> placa;
-                    std::cout << "Combustível: ";
-                    std::cin >> combustivel;
-                    std::cout << "Tipo Freio Dianteiro: ";
-                    std::cin >> fd;
-                    std::cout << "Tipo Freio Traseiro: ";
-                    std::cin >> ft;
-                    std::cout << "Tipo de Partida: ";
-                    std::cin >> partida;
-                    std::cout << "Tipo de Injeção: ";
-                    std::cin >> injecao;
-                    
-                    Veiculo *v = new Moto(id, placa, ano, marca, modelo, cor, combustivel, preco, fd, ft, partida, injecao, cilindradas);
-                    estoque.adicionar(v, quantidade);
-                }
-
-                break;
-            case 3:
-                std::cout << "Digite o id do veiculo que deseja remover: ";
-                int remove;
-                std::cin >> remove;
-                estoque.remover(remove);
-                break;
-            case 4:
-                std::cout << "Procurar por ID (0) ou Modelo (1)?" << std::endl;
-                int type;
-                std::cin >> type;
-                if (type == 0)
-                {
-                    int idd;
-                    std::cout << "Digite o ID do veículo: ";
-                    std::cin >> idd;
-                    estoque.procurar(idd);
-                }
-                else
-                {
-                    std::string model;
-                    std::cout << "Digite o modelo do veículo: ";
-                    std::cin >> model;
-                    estoque.procurar(model);
-                }
-                break;
-            case 0:
-                std::cout << "Sistema encerrado." << std::endl;
-                break;
-            default:
-                std::cout << "Opcao invalida." << std::endl;
-                break;
-        }
-                
-    } while(opcao !=0);
-    /*
     std::vector<Funcionario> funcionarios;
     std::vector<Gerente> gerentes;
     std::vector<Vendedor> vendedores;
@@ -207,7 +81,7 @@ int main() {
                 case 1: {
                     std::cout << std::endl << "===Cadastrar Funcionário===" << std::endl;
                     
-                    int tipo; // 0 - gerente || 1 - vendedor
+                    // int tipo; // 0 - gerente || 1 - vendedor
                     int id = funcionarios.size();
 
                     std::string nome;
@@ -249,7 +123,7 @@ int main() {
                 case 2:
                     std::cout << std::endl << "===Listar Funcionários===" << std::endl;
 
-                    for(int i = 0; i < funcionarios.size(); i++){
+                    for(unsigned int i = 0; i < funcionarios.size(); i++){
                         std::cout << "ID: " << funcionarios[i].getId() << std::endl;
                         std::cout << "NOME: " << funcionarios[i].getNome() << std::endl;
                         std::cout << "CPF: " << funcionarios[i].getCpf() << std::endl;
@@ -329,12 +203,112 @@ int main() {
 
                 switch (menu_interno) {
                 case 1:
+                    std::cout << "Carro (0) ou Moto (1)?" << std::endl;
+                    int tipo;
+                    std::cin >> tipo;
+                    if (tipo == 0)
+                    {
+                        int id, ano, preco, nportas, quantidade;
+                        std::string placa, marca, modelo, cor, combustivel, tdirecao;
+                        bool ac,ve,te;
+
+                        id = estoque.getNumVeiculos();
+                        std::cout << "Quantidade: ";
+                        std::cin >> quantidade;
+                        std::cout << "Ano: ";
+                        std::cin >> ano;
+                        std::cout << "Preço: ";
+                        std::cin >> preco;
+                        std::cout << "Marca: ";
+                        std::cin >> marca;
+                        std::cout << "Modelo: ";
+                        std::cin >> modelo;
+                        std::cout << "Número de portas: ";
+                        std::cin >> nportas;
+                        std::cout << "Cor: ";
+                        std::cin >> cor;
+                        std::cout << "Placa: ";
+                        std::cin >> placa;
+                        std::cout << "Combustível: ";
+                        std::cin >> combustivel;
+                        std::cout << "Tipo de direção: ";
+                        std::cin >> tdirecao;
+                        std::cout << "Ar condicionado?(0/1): ";
+                        std::cin >> ac;
+                        std::cout << "Travas elétricas? (0/1): ";
+                        std::cin >> te;
+                        std::cout << "Vidros elétricos? (0/1): ";
+                        std::cin >> ve;
+                        
+                        Veiculo *v = new Carro(id, placa, ano, marca, modelo, cor, combustivel, preco, nportas, ac, ve, te, tdirecao);
+                        estoque.adicionar(v, quantidade);
+                    }
+                    else
+                    {
+                        int id, ano, preco, cilindradas, quantidade;
+                        std::string placa, marca, modelo, cor, combustivel, fd, ft, partida, injecao;
+
+                        id = estoque.getNumVeiculos();
+                        
+                        std::cout << "Quantidade: ";
+                        std::cin >> quantidade;
+                        std::cout << "Ano: ";
+                        std::cin >> ano;
+                        std::cout << "Preço: ";
+                        std::cin >> preco;
+                        std::cout << "Marca: ";
+                        std::cin >> marca;
+                        std::cout << "Modelo: ";
+                        std::cin >> modelo;
+                        std::cout << "Número de cilindradas: ";
+                        std::cin >> cilindradas;
+                        std::cout << "Cor: ";
+                        std::cin >> cor;
+                        std::cout << "Placa: ";
+                        std::cin >> placa;
+                        std::cout << "Combustível: ";
+                        std::cin >> combustivel;
+                        std::cout << "Tipo Freio Dianteiro: ";
+                        std::cin >> fd;
+                        std::cout << "Tipo Freio Traseiro: ";
+                        std::cin >> ft;
+                        std::cout << "Tipo de Partida: ";
+                        std::cin >> partida;
+                        std::cout << "Tipo de Injeção: ";
+                        std::cin >> injecao;
+                        
+                        Veiculo *v = new Moto(id, placa, ano, marca, modelo, cor, combustivel, preco, fd, ft, partida, injecao, cilindradas);
+                        estoque.adicionar(v, quantidade);
+                    }
+
                     break;
                 case 2:
+                    estoque.imprimir_estoque();
                     break;
                 case 3:
+                    std::cout << "Procurar por ID (0) ou Modelo (1)?" << std::endl;
+                    int type;
+                    std::cin >> type;
+                    if (type == 0)
+                    {
+                        int idd;
+                        std::cout << "Digite o ID do veículo: ";
+                        std::cin >> idd;
+                        estoque.procurar(idd);
+                    }
+                    else
+                    {
+                        std::string model;
+                        std::cout << "Digite o modelo do veículo: ";
+                        std::cin >> model;
+                        estoque.procurar(model);
+                    }
                     break;
                 case 4:
+                    std::cout << "Digite o id do veiculo que deseja remover: ";
+                    int remove;
+                    std::cin >> remove;
+                    estoque.remover(remove);
                     break;
                 case 0:
                     break;
@@ -380,7 +354,7 @@ int main() {
 			std::cout << "Opção inválida!" << std::endl;
             break;
 		}
-    } while (menu_principal != 0);*/
+    } while (menu_principal != 0);
 
     return 0;
 }

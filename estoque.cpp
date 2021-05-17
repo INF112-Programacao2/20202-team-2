@@ -17,7 +17,7 @@ void Estoque::adicionar(Veiculo *veiculo, int qntd) {
 }
 
 void Estoque::remover(Veiculo *veiculo, int qntd) {
-	for (int i=0; i<_veiculos.size(); i++)
+	for (unsigned int i=0; i<_veiculos.size(); i++)
 	{
 		if (_veiculos[i].v->getId() == veiculo->getId())
 		{
@@ -36,7 +36,7 @@ void Estoque::remover(Veiculo *veiculo, int qntd) {
 }
 
 void Estoque::remover(int id) {
-	for (int i=0; i<_veiculos.size(); i++)
+	for (unsigned int i=0; i<_veiculos.size(); i++)
 	{
 		if (_veiculos[i].v->getId() == id)
 		{
@@ -50,7 +50,7 @@ void Estoque::remover(int id) {
 }
 
 void Estoque::procurar(int id){
-	for (int i=0; i<_veiculos.size(); i++)
+	for (unsigned int i=0; i<_veiculos.size(); i++)
 	{
 		if (_veiculos[i].v->getId() == id)
 		{
@@ -67,7 +67,7 @@ void Estoque::procurar(int id){
 void Estoque::procurar(std::string modelo){
 	bool tem = false;
 
-	for (int i=0; i<_veiculos.size(); i++)
+	for (unsigned int i=0; i<_veiculos.size(); i++)
 	{
 		if (_veiculos[i].v->getModelo() == modelo)
 		{
@@ -86,7 +86,7 @@ void Estoque::imprimir_estoque() {
 		std::cout << "Estoque vazio." << std::endl;
 	else
 	{
-		for (int i=0; i<_veiculos.size(); i++)
+		for (unsigned int i=0; i<_veiculos.size(); i++)
 		{
 			_veiculos[i].v->exibir_informacoes();
 			std::cout << "Quantidade em estoque: " << _veiculos[i].quantidade << std::endl;
