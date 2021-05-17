@@ -43,4 +43,4 @@ venda.o: venda.h venda.cpp
 	${CC} ${CFLAGS} -c venda.cpp
 
 clean:
-	rm -f main *.o 
+	rm -f main *.o *.txt
