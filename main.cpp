@@ -15,6 +15,20 @@
 #include "ClientePF.h"
 #include "ClientePJ.h"
 
+int input_menu() {
+    int x = -1;
+    while(x <= 0 || x > 4){
+            std::cin >> x;
+
+            if(!std::cin || x < 0 || x > 100)
+                return 0;
+
+            return x;
+    }
+
+    return 0;
+}
+
 
 int main() {
 
@@ -49,8 +63,8 @@ int main() {
     std::vector<Vendedor> vendedores;
 
     std::cout << "Sistema de Concessionária" << std::endl;
-    int menu_principal = 0;
-    int menu_interno = 0;
+    int menu_principal;
+    int menu_interno;
     int id;
 
     do {
@@ -62,7 +76,7 @@ int main() {
         std::cout << "0 - Sair" << std::endl;
 
         std::cout << std::endl << "Insira uma opção: ";
-        std::cin >> menu_principal;
+        menu_principal = input_menu();
 
         switch (menu_principal) {
 		case 1:
@@ -75,82 +89,108 @@ int main() {
                 std::cout << "0 - Voltar" << std::endl;
 
                 std::cout << std::endl << "Insira uma opção: ";
-                std::cin >> menu_interno;
+                menu_interno = input_menu();
 
                 switch (menu_interno) {
                 case 1: {
                     std::cout << std::endl << "===Cadastrar Funcionário===" << std::endl;
-                    
-                    // int tipo; // 0 - gerente || 1 - vendedor
-                    int id = funcionarios.size();
+                    try {
+                        int tipo; // 0 - gerente || 1 - vendedor
+                        int id = funcionarios.size() + 1;
 
-                    std::string nome;
-                    std::cout << "Insira o nome: ";
-                    std::cin.ignore();
-                    std::getline(std::cin, nome);
+                        std::string nome;
+                        std::cout << "Insira o nome: ";
+                        std::cin.ignore();
+                        std::getline(std::cin, nome);
 
-                    std::string cpf;
-                    std::cout << "Insira o cpf: ";
-                    std::cin >> cpf;
+                        std::string cpf;
+                        std::cout << "Insira o cpf: ";
+                        std::cin >> cpf;
 
-                    std::string telefone;
-                    std::cout << "Insira o telefone (sem espaços): ";
-                    std::cin >> telefone; 
+                        std::string telefone;
+                        std::cout << "Insira o telefone (sem espaços): ";
+                        std::cin >> telefone; 
 
-                    std::string endereco;
-                    std::cout << "Insira o endereço: ";
-                    std::cin.ignore();
-                    std::getline(std::cin, endereco);
+                        std::string endereco;
+                        std::cout << "Insira o endereço: ";
+                        std::cin.ignore();
+                        std::getline(std::cin, endereco);
 
-                    double salario;
-                    std::cout << "Insira o salário: ";
-                    std::cin >> salario;
+                        double salario;
+                        std::cout << "Insira o salário: ";
+                        std::cin >> salario;
 
-                    std::string conta; 
-                    std::cout << "Insira a conta: ";
-                    std::cin.ignore();
-                    std::getline(std::cin, conta);
+                        std::string conta; 
+                        std::cout << "Insira a conta: ";
+                        std::cin.ignore();
+                        std::getline(std::cin, conta);
 
-                    Vendedor f(id, nome, cpf, telefone, endereco, salario, conta);
-                    vendedores.push_back(f);
-                    funcionarios.push_back(f);
+                        std::cout << "Insira o tipo (0 - Gerente, 1 - vendedor): ";
+                        std::cin >> tipo;
 
-                    // delete v;
-                    // std::cout << "Insira o tipo (0 - Gerente, 1 - vendedor): ";
-                    // std::cin >> conta; 
+                        if(tipo == 0){
+                            Gerente f(id, nome, cpf, telefone, endereco, salario, conta);
+                            gerentes.push_back(f);
+                            funcionarios.push_back(f);
+                        } else if (tipo == 1){
+                            Vendedor f(id, nome, cpf, telefone, endereco, salario, conta);
+                            vendedores.push_back(f);
+                            funcionarios.push_back(f);
+                        } else {
+                            throw std::exception();
+                        } 
+                    } catch (std::exception &e){
+                        std::cout << "Ocorreu um erro ao cadastrar funcionário: " << std::endl;
+                    }
                 }
                     break;
                 case 2:
                     std::cout << std::endl << "===Listar Funcionários===" << std::endl;
-
-                    for(unsigned int i = 0; i < funcionarios.size(); i++){
-                        std::cout << "ID: " << funcionarios[i].getId() << std::endl;
-                        std::cout << "NOME: " << funcionarios[i].getNome() << std::endl;
-                        std::cout << "CPF: " << funcionarios[i].getCpf() << std::endl;
-                        std::cout << "TELEFONE: " << funcionarios[i].getTelefone() << std::endl;
-                        std::cout << "ENDEREÇO: " << funcionarios[i].getEndereco() << std::endl;
-                        std::cout << "SALÁRIO: " << funcionarios[i].getSalario() << std::endl;
-                        std::cout << "CONTA: " << funcionarios[i].getConta() << std::endl;
-                        std::cout << (funcionarios.size() > 1 ? "---------------------------" : "") << std::endl;
+                    try{
+                        for(Funcionario funcionario:funcionarios){
+                            std::cout << "ID: " << funcionario.getId() << std::endl;
+                            std::cout << "NOME: " << funcionario.getNome() << std::endl;
+                            std::cout << "CPF: " << funcionario.getCpf() << std::endl;
+                            std::cout << "TELEFONE: " << funcionario.getTelefone() << std::endl;
+                            std::cout << "ENDEREÇO: " << funcionario.getEndereco() << std::endl;
+                            std::cout << "SALÁRIO: " << funcionario.getSalario() << std::endl;
+                            std::cout << "CONTA: " << funcionario.getConta() << std::endl;
+                            std::cout << (funcionarios.size() > 1 ? "---------------------------" : "") << std::endl;
+                        }
+                    } catch (std::exception &e){
+                        std::cout << "Ocorreu um erro ao listar funcionário: " << std::endl;
                     }
                     break;
                 case 3:
                     std::cout << std::endl << "===Buscar Funcionário===" << std::endl;
-                    std:: cout << "Informe o id do Funcionário: ";
-                    std::cin >> id;
-                    std::cout << "NOME: " << funcionarios[id].getNome() << std::endl;
-                    std::cout << "CPF: " << funcionarios[id].getCpf() << std::endl;
-                    std::cout << "TELEFONE: " << funcionarios[id].getTelefone() << std::endl;
-                    std::cout << "ENDEREÇO: " << funcionarios[id].getEndereco() << std::endl;
-                    std::cout << "SALÁRIO: " << funcionarios[id].getSalario() << std::endl;
-                    std::cout << "CONTA: " << funcionarios[id].getConta() << std::endl;
+                    try {
+
+                        std::cout << "Informe o id do Funcionário: ";
+                        std::cin >> id;
+                        std::cout << "NOME: " << funcionarios[id-1].getNome() << std::endl;
+                        std::cout << "CPF: " << funcionarios[id-1].getCpf() << std::endl;
+                        std::cout << "TELEFONE: " << funcionarios[id-1].getTelefone() << std::endl;
+                        std::cout << "ENDEREÇO: " << funcionarios[id-1].getEndereco() << std::endl;
+                        std::cout << "SALÁRIO: " << funcionarios[id-1].getSalario() << std::endl;
+                        std::cout << "CONTA: " << funcionarios[id-1].getConta() << std::endl;
+                    } catch (std::exception &e){
+                        std::cout << "Ocorreu um erro ao buscar funcionário: " << std::endl;
+                    }
                     break;
                 case 4:
                     std::cout << std::endl << "===Excluir Funcionário===" << std::endl;
-                    std:: cout << "Informe o id do Funcionário: ";
-                    std::cin >> id;
-                    funcionarios.erase(funcionarios.begin() + id);
-                    std:: cout << "Funcionário excluído com sucesso!" << std::endl;
+                    try{
+                        std:: cout << "Informe o id do Funcionário: ";
+                        std::cin >> id;
+                        if((funcionarios.begin() + id) < funcionarios.end()){
+                            funcionarios.erase(funcionarios.begin() + id);
+                            std:: cout << "Funcionário excluído com sucesso!" << std::endl;
+                        } else {
+                            throw std::exception();
+                        }
+                    } catch (std::exception &e){
+                        std::cout << "Ocorreu um erro ao excluir funcionário: " << std::endl;
+                    }
                     break;
                 case 0:
                     break;
@@ -170,7 +210,7 @@ int main() {
                 std::cout << "0 - Voltar" << std::endl;
 
                 std::cout << std::endl << "Insira uma opção: ";
-                std::cin >> menu_interno;
+                menu_interno = input_menu();
 
                 switch (menu_interno) {
                 case 1:
@@ -199,7 +239,7 @@ int main() {
                 std::cout << "0 - Voltar" << std::endl;
 
                 std::cout << std::endl << "Insira uma opção: ";
-                std::cin >> menu_interno;
+                menu_interno = input_menu();
 
                 switch (menu_interno) {
                 case 1:
@@ -328,7 +368,7 @@ int main() {
                 std::cout << "0 - Voltar" << std::endl;
 
                 std::cout << std::endl << "Insira uma opção: ";
-                std::cin >> menu_interno;
+                menu_interno = input_menu();
 
                 switch (menu_interno) {
                 case 1:
