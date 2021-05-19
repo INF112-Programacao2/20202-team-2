@@ -47,9 +47,6 @@ int main() {
     // estoque.adicionar(v3, 1);
     // estoque.adicionar(v4, 1);
 
-    // Funcionario *f = new Vendedor(1, "João Carlos", "045.574.329-45", "(31) 95234-1485", "Av. PH Rolfs, 1023", 2200, "0415234-4");
-    // Funcionario *f1 = new Vendedor(1, "João Carlos", "045.574.329-45", "(31) 95234-1485", "Av. PH Rolfs, 1023", 2200, "0415234-4");
-    // Funcionario *f2 = new Vendedor(2, "João asdasd", "123.574.329-45", "(33) 95234-1485", "Av. PH Rolfs, 1023", 2200, "0415234-4");
     // Cliente *c = new ClientePF(001, "Márcio Correa", "(31) 99745-3710", "Rua dos Estudantes, 290", "026.347.601-63", "20/08/1995", "Solteiro");
     // Venda venda1(f,c,v1,"14/05/2021",0,"Cartão de Crédito", 39990,"Nenhuma");
     // Venda venda2(f,c,v4,"14/05/2021",0,"Cartão de Crédito", v4->getPreco(),"Nenhuma");
@@ -64,8 +61,12 @@ int main() {
     // delete f;
     // delete c;
     
-    // funcionarios.push_back(*f1);
-    // funcionarios.push_back(*f2);
+    Vendedor *f1 = new Vendedor(1, "João Carlos", "045.574.329-45", "(31) 95234-1485", "Av. PH Rolfs, 1023", 2200, "0415234-4");
+    Gerente *f2 = new Gerente(2, "João asdasd", "123.574.329-45", "(33) 95234-1485", "Av. PH Rolfs, 1023", 2200, "0415234-4");
+    vendedores.push_back(*f1);
+    gerentes.push_back(*f2);
+    funcionarios.push_back(*f1);
+    funcionarios.push_back(*f2);
 
     std::cout << "Sistema de Concessionária" << std::endl;
     int menu_principal;
@@ -152,14 +153,24 @@ int main() {
                 case 2:
                     std::cout << std::endl << "===Listar Funcionários===" << std::endl;
                     try{
-                        for(Funcionario funcionario:funcionarios){
-                            std::cout << "ID: " << funcionario.getId() << std::endl;
-                            std::cout << "NOME: " << funcionario.getNome() << std::endl;
-                            std::cout << "CPF: " << funcionario.getCpf() << std::endl;
-                            std::cout << "TELEFONE: " << funcionario.getTelefone() << std::endl;
-                            std::cout << "ENDEREÇO: " << funcionario.getEndereco() << std::endl;
-                            std::cout << "SALÁRIO: " << funcionario.getSalario() << std::endl;
-                            std::cout << "CONTA: " << funcionario.getConta() << std::endl;
+                        for(Gerente gerente:gerentes){
+                            std::cout << "ID: " << gerente.getId() << std::endl;
+                            std::cout << "NOME: " << gerente.getNome() << std::endl;
+                            std::cout << "CPF: " << gerente.getCpf() << std::endl;
+                            std::cout << "TELEFONE: " << gerente.getTelefone() << std::endl;
+                            std::cout << "ENDEREÇO: " << gerente.getEndereco() << std::endl;
+                            std::cout << "SALÁRIO: " << gerente.getSalario() << std::endl;
+                            std::cout << "CONTA: " << gerente.getConta() << std::endl;
+                            std::cout << (funcionarios.size() > 1 ? "---------------------------" : "") << std::endl;
+                        }
+                        for(Vendedor vendedor:vendedores){
+                            std::cout << "ID: " << vendedor.getId() << std::endl;
+                            std::cout << "NOME: " << vendedor.getNome() << std::endl;
+                            std::cout << "CPF: " << vendedor.getCpf() << std::endl;
+                            std::cout << "TELEFONE: " << vendedor.getTelefone() << std::endl;
+                            std::cout << "ENDEREÇO: " << vendedor.getEndereco() << std::endl;
+                            std::cout << "SALÁRIO: " << vendedor.getSalario() << std::endl;
+                            std::cout << "CONTA: " << vendedor.getConta() << std::endl;
                             std::cout << (funcionarios.size() > 1 ? "---------------------------" : "") << std::endl;
                         }
                     } catch (std::exception &e){
@@ -172,14 +183,24 @@ int main() {
 
                         std::cout << "Informe o id do Funcionário: ";
                         std::cin >> id;
-                        for(Funcionario funcionario:funcionarios){
-                            if(funcionario.getId() == id){
-                                std::cout << "NOME: " << funcionario.getNome() << std::endl;
-                                std::cout << "CPF: " << funcionario.getCpf() << std::endl;
-                                std::cout << "TELEFONE: " << funcionario.getTelefone() << std::endl;
-                                std::cout << "ENDEREÇO: " << funcionario.getEndereco() << std::endl;
-                                std::cout << "SALÁRIO: " << funcionario.getSalario() << std::endl;
-                                std::cout << "CONTA: " << funcionario.getConta() << std::endl;
+                        for(Gerente gerente:gerentes){
+                            if(gerente.getId() == id){
+                                std::cout << "NOME: " << gerente.getNome() << std::endl;
+                                std::cout << "CPF: " << gerente.getCpf() << std::endl;
+                                std::cout << "TELEFONE: " << gerente.getTelefone() << std::endl;
+                                std::cout << "ENDEREÇO: " << gerente.getEndereco() << std::endl;
+                                std::cout << "SALÁRIO: " << gerente.getSalario() << std::endl;
+                                std::cout << "CONTA: " << gerente.getConta() << std::endl;
+                            }
+                        }
+                        for(Vendedor vendedor:vendedores){
+                            if(vendedor.getId() == id){
+                                std::cout << "NOME: " << vendedor.getNome() << std::endl;
+                                std::cout << "CPF: " << vendedor.getCpf() << std::endl;
+                                std::cout << "TELEFONE: " << vendedor.getTelefone() << std::endl;
+                                std::cout << "ENDEREÇO: " << vendedor.getEndereco() << std::endl;
+                                std::cout << "SALÁRIO: " << vendedor.getSalario() << std::endl;
+                                std::cout << "CONTA: " << vendedor.getConta() << std::endl;
                             }
                         }
                     } catch (std::exception &e){
