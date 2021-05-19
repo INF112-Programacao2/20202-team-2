@@ -1,16 +1,11 @@
 #include "venda.h"
 
-Venda::Venda(Funcionario *funcionario_responsavel, Cliente *cliente_atendido, Veiculo *veiculo_vendido, std::string data, double desconto, std::string forma_pagamento, double valor_final, std::string obs){
-	_funcionario_responsavel = funcionario_responsavel;
-	_cliente_atendido = cliente_atendido;
-	_veiculo_vendido = veiculo_vendido;
-	_data = data;
-	_desconto = desconto;
-	_forma_pagamento = forma_pagamento;
-	_valor_final = valor_final; 
-	_obs = obs;
-}
+Venda::Venda(int id, Funcionario *funcionario_responsavel, Cliente *cliente_atendido, Veiculo *veiculo_vendido, std::string data, double desconto, std::string forma_pagamento, double valor_final, std::string obs):
+_id(id),_funcionario_responsavel(funcionario_responsavel), _cliente_atendido(cliente_atendido), _veiculo_vendido(veiculo_vendido), _data(data), _desconto(desconto), _forma_pagamento(forma_pagamento), _valor_final(valor_final), _obs(obs){}
 
+int Venda::get_id(){
+	return _id;
+}
 Funcionario* Venda::get_funcionario(){
 	return _funcionario_responsavel;
 }
@@ -75,7 +70,20 @@ void Venda::set_obs(std::string o){
 	_obs = o;
 }
 
+void Venda::imprimir_informacoes(){
+	std::cout << "ID: " << this->get_id() << '\n';
+	std::cout << "Cliente: " << this->get_cliente()->getNome() << '\n';
+    std::cout << "Funcionário responsável: " << this->get_funcionario()->getNome() << '\n';
+    std::cout << "Marca e modelo do veículo: " << this->get_veiculo_vendido()->getMarca() << " " << this->get_veiculo_vendido()->getModelo() << '\n';
+    std::cout << "Valor final: " << this->get_valor_final() << '\n';
+    std::cout << "Forma de pagamento: " << this->get_forma_pagamento() << '\n';
+    std::cout << "Data: " << this->get_data() << '\n';
+    std::cout << "Observações: " << this->get_obs() << '\n';
+    std::cout << "--------------------------------------------" << '\n';
+}
+
 void Venda::salvar_venda(){
+	std::ofstream _vendas;
 	_vendas.open("relatorio de vendas.txt", std::ios::app);
 
 	if(!_vendas.is_open())
@@ -83,7 +91,7 @@ void Venda::salvar_venda(){
 		std::cout << "Erro ao salvar venda." << std::endl;
 		return;
 	}
-
+	_vendas << "ID: " << this->get_id() << '\n';
 	_vendas << "Cliente: " << this->get_cliente()->getNome() << '\n';
 	_vendas << "Funcionário responsável: " << this->get_funcionario()->getNome() << '\n';
 	_vendas << "Marca e modelo do veículo: " << this->get_veiculo_vendido()->getMarca() << " " << this->get_veiculo_vendido()->getModelo() << '\n';
