@@ -645,6 +645,7 @@ int main() {
                             valorfinal = veiculo_vendido->getPreco() - desconto;
                             Venda venda(id_v, funcionario_sistema, cliente_atendido, veiculo_vendido, data, desconto, formapg, valorfinal, obs);
                             venda.salvar_venda();
+                            vendas.push_back(venda);
                             estoque.remover(veiculo_vendido, 1);
                         }
                         else if (tp == 2)
@@ -695,6 +696,7 @@ int main() {
                             valorfinal = veiculo_vendido->getPreco() - desconto;
                             Venda venda(id_v, funcionario_sistema, cliente_atendido, veiculo_vendido, data, desconto, formapg, valorfinal, obs);
                             venda.salvar_venda();
+                            vendas.push_back(venda);
                             estoque.remover(veiculo_vendido, 1);
                         }
                         else{
