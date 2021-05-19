@@ -1,11 +1,11 @@
 #include <iostream>
 #include <string>
 
-#include "cliente.h"
 #include "clientepf.h"
 
-ClientePF::ClientePF(int id, std::string nome, std::string telefone, std::string endereco, std::string cpf, std::string dataNascimento, std::string estadoCivil):
+ClientePF::ClientePF(int id, std::string nome, std::string telefone, std::string endereco, std::string cpf, std::string dataNascimento, std::string estadoCivil) :
     Cliente(id, nome, telefone, endereco), _cpf(cpf), _dataNascimento(dataNascimento), _estadoCivil(estadoCivil) {}
+
 
 std::string ClientePF::getCpf(){
     return _cpf;
@@ -29,4 +29,14 @@ std::string ClientePF::getEstadoCivil(){
 
 void ClientePF::setEstadoCivil(std::string estadoCivil){
     _estadoCivil = estadoCivil;
+}
+
+void ClientePF::exibirInformacoes(){
+    std::cout << "ID: " << getId() << std::endl;
+    std::cout << "NOME: " << getNome() << std::endl;
+    std::cout << "CPF: " << getCpf() << std::endl;
+    std::cout << "TELEFONE: " << getTelefone() << std::endl;
+    std::cout << "ENDEREÇO: " << getEndereco() << std::endl;
+    std::cout << "DATA DE NASCIMENTO: " << getDataNascimento() << std::endl;
+    std::cout << "ESTADO CIVIL: " << getEstadoCivil() << std::endl;
 }

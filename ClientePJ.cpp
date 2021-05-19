@@ -1,7 +1,6 @@
 #include <iostream>
 #include <string>
 
-#include "cliente.h"
 #include "clientepj.h"
 
 ClientePJ::ClientePJ(int id, std::string nome, std::string telefone, std::string endereco, std::string cnpj):
@@ -13,4 +12,12 @@ std::string ClientePJ::getCnpj(){
 
 void ClientePJ::setCnpj(std::string cnpj){
   	_cnpj = cnpj;
+}
+
+void ClientePJ::exibirInformacoes(){
+	std::cout << "ID: " << getId() << std::endl;
+	std::cout << "NOME: " << getNome() << std::endl;
+	std::cout << "CNPJ: " << getCnpj() << std::endl;
+	std::cout << "TELEFONE: " << getTelefone() << std::endl;
+	std::cout << "ENDEREÇO: " << getEndereco() << std::endl;
 }

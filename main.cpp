@@ -12,20 +12,17 @@
 #include "estoque.h"
 #include "venda.h"
 #include "cliente.h"
-#include "ClientePF.h"
-#include "ClientePJ.h"
+#include "clientePF.h"
+#include "clientePJ.h"
 
 int input_menu() {
     int x = -1;
     while(x <= 0 || x > 4){
             std::cin >> x;
-
             if(!std::cin || x < 0 || x > 100)
                 return 0;
-
             return x;
     }
-
     return 0;
 }
 
@@ -43,7 +40,9 @@ int main() {
     estoque.adicionar(v3, 1);
     estoque.adicionar(v4, 1);
 
-    Funcionario *f = new Vendedor(001, "João Carlos", "045.574.329-45", "(31) 95234-1485", "Av. PH Rolfs, 1023", 2200, "0415234-4");
+    Funcionario *f = new Vendedor(1, "João Carlos", "045.574.329-45", "(31) 95234-1485", "Av. PH Rolfs, 1023", 2200, "0415234-4");
+    Funcionario *f1 = new Vendedor(1, "João Carlos", "045.574.329-45", "(31) 95234-1485", "Av. PH Rolfs, 1023", 2200, "0415234-4");
+    Funcionario *f2 = new Vendedor(2, "João asdasd", "123.574.329-45", "(33) 95234-1485", "Av. PH Rolfs, 1023", 2200, "0415234-4");
     Cliente *c = new ClientePF(001, "Márcio Correa", "(31) 99745-3710", "Rua dos Estudantes, 290", "026.347.601-63", "20/08/1995", "Solteiro");
     Venda venda1(f,c,v1,"14/05/2021",0,"Cartão de Crédito", 39990,"Nenhuma");
     Venda venda2(f,c,v4,"14/05/2021",0,"Cartão de Crédito", v4->getPreco(),"Nenhuma");
@@ -61,6 +60,12 @@ int main() {
     std::vector<Funcionario> funcionarios;
     std::vector<Gerente> gerentes;
     std::vector<Vendedor> vendedores;
+    std::vector<Cliente> clientes;
+    std::vector<ClientePF> clientesPF;
+    std::vector<ClientePJ> clientesPJ;
+    
+    funcionarios.push_back(*f1);
+    funcionarios.push_back(*f2);
 
     std::cout << "Sistema de Concessionária" << std::endl;
     int menu_principal;
@@ -96,7 +101,7 @@ int main() {
                     std::cout << std::endl << "===Cadastrar Funcionário===" << std::endl;
                     try {
                         int tipo; // 0 - gerente || 1 - vendedor
-                        int id = funcionarios.size() + 1;
+                        int id = funcionarios.size() == 0 ? 1: funcionarios[funcionarios.size()-1].getId() + 1;
 
                         std::string nome;
                         std::cout << "Insira o nome: ";
@@ -140,7 +145,7 @@ int main() {
                             throw std::exception();
                         } 
                     } catch (std::exception &e){
-                        std::cout << "Ocorreu um erro ao cadastrar funcionário: " << std::endl;
+                        std::cout << "Ocorreu um erro ao cadastrar funcionário" << std::endl;
                     }
                 }
                     break;
@@ -167,14 +172,18 @@ int main() {
 
                         std::cout << "Informe o id do Funcionário: ";
                         std::cin >> id;
-                        std::cout << "NOME: " << funcionarios[id-1].getNome() << std::endl;
-                        std::cout << "CPF: " << funcionarios[id-1].getCpf() << std::endl;
-                        std::cout << "TELEFONE: " << funcionarios[id-1].getTelefone() << std::endl;
-                        std::cout << "ENDEREÇO: " << funcionarios[id-1].getEndereco() << std::endl;
-                        std::cout << "SALÁRIO: " << funcionarios[id-1].getSalario() << std::endl;
-                        std::cout << "CONTA: " << funcionarios[id-1].getConta() << std::endl;
+                        for(Funcionario funcionario:funcionarios){
+                            if(funcionario.getId() == id){
+                                std::cout << "NOME: " << funcionario.getNome() << std::endl;
+                                std::cout << "CPF: " << funcionario.getCpf() << std::endl;
+                                std::cout << "TELEFONE: " << funcionario.getTelefone() << std::endl;
+                                std::cout << "ENDEREÇO: " << funcionario.getEndereco() << std::endl;
+                                std::cout << "SALÁRIO: " << funcionario.getSalario() << std::endl;
+                                std::cout << "CONTA: " << funcionario.getConta() << std::endl;
+                            }
+                        }
                     } catch (std::exception &e){
-                        std::cout << "Ocorreu um erro ao buscar funcionário: " << std::endl;
+                        std::cout << "Ocorreu um erro ao buscar funcionário" << std::endl;
                     }
                     break;
                 case 4:
@@ -182,14 +191,21 @@ int main() {
                     try{
                         std:: cout << "Informe o id do Funcionário: ";
                         std::cin >> id;
-                        if((funcionarios.begin() + id) < funcionarios.end()){
-                            funcionarios.erase(funcionarios.begin() + id);
+                        if((funcionarios.begin() + id-1) < funcionarios.end()){
+                            for(unsigned int i = 0; i < vendedores.size(); i++)
+                                if(vendedores[i].getId() == id){
+                                    vendedores.erase(vendedores.begin() + i);
+                                }
+                            for(unsigned int i = 0; i < gerentes.size(); i++)
+                                if(gerentes[i].getId() == id){
+                                    gerentes.erase(gerentes.begin() + i);
+                                }
                             std:: cout << "Funcionário excluído com sucesso!" << std::endl;
                         } else {
                             throw std::exception();
                         }
                     } catch (std::exception &e){
-                        std::cout << "Ocorreu um erro ao excluir funcionário: " << std::endl;
+                        std::cout << "Ocorreu um erro ao excluir funcionário" << std::endl;
                     }
                     break;
                 case 0:
@@ -201,7 +217,7 @@ int main() {
             } while (menu_interno != 0);
             break;
 		case 2:
-			do {
+			do{
                 std::cout << std::endl << "===Gerenciar Clientes===" << std::endl;
                 std::cout << "1 - Cadastrar Cliente" << std::endl;
                 std::cout << "2 - Listar Clientes" << std::endl;
@@ -210,16 +226,125 @@ int main() {
                 std::cout << "0 - Voltar" << std::endl;
 
                 std::cout << std::endl << "Insira uma opção: ";
-                menu_interno = input_menu();
+                std::cin >> menu_interno;
 
                 switch (menu_interno) {
-                case 1:
+                case 1:{
+                    std::cout << std::endl << "===Cadastrar Cliente===" << std::endl;
+                    
+                    int tipoCliente; // 0 - pessoa física || 1 - pessoa jurídica
+                    unsigned int idCliente = clientes.size();
+
+                    std::string nomeCliente;
+                    std::cout << "Insira o nome: ";
+                    std::cin.ignore();
+                    std::getline(std::cin, nomeCliente);
+
+                    std::string telefoneCliente;
+                    std::cout << "Insira o telefone (sem espaços): ";
+                    std::cin >> telefoneCliente; 
+
+                    std::string enderecoCliente;
+                    std::cout << "Insira o endereço: ";
+                    std::cin.ignore();
+                    std::getline(std::cin, enderecoCliente);
+
+                    std::cout << "Pessoa Fisica (1) ou Pessoa Juridica (0): ";
+                    std::cin >> tipoCliente;
+                    if (tipoCliente == 1){
+                        std::string cpfCliente; 
+                        std::cout << "Insira o CPF: ";
+                        std::cin.ignore();
+                        std::getline(std::cin, cpfCliente);
+
+                        std::string estadosCivis[5] = {"Solteiro(a)", "Casado(a)", "Divorciado(a)", "Viuvo(a)", "Outro"};
+
+                        int codEstadoCivilCliente;
+                        std::string estadoCivilCliente;
+                        for (int i = 0; i<5; i++) std::cout << i << " - " << estadosCivis[i] << std::endl;
+                        std::cout << "Insira o estado civil: ";
+                        std::cin >> codEstadoCivilCliente;
+                        estadoCivilCliente = estadosCivis[codEstadoCivilCliente];
+
+
+                        std::string dataNascimentoCliente; 
+                        std::cout << "Insira a data de nascimento: ";
+                        std::cin.ignore();
+                        std::getline(std::cin, dataNascimentoCliente);
+
+                        ClientePF c(idCliente, nomeCliente, telefoneCliente, enderecoCliente, cpfCliente, dataNascimentoCliente, estadoCivilCliente);
+                        clientes.push_back(c);
+                        clientesPF.push_back(c);
+                        
+
+                    } else if (tipoCliente==0){
+
+                        std::string cnpjCliente; 
+                        std::cout << "Insira o CNPJ: ";
+                        std::cin.ignore();
+                        std::getline(std::cin, cnpjCliente);
+
+                        ClientePJ c(id, nomeCliente, telefoneCliente, enderecoCliente, cnpjCliente);
+                        clientes.push_back(c);
+                        clientesPJ.push_back(c);
+                    }  
+                }
                     break;
                 case 2:
+                    std::cout << std::endl << "===Listar Clientes===" << std::endl;
+
+                    std::cout << std::endl << "===Clientes Pessoa Fisica===" << std::endl;
+
+                    for(unsigned int i = 0; i < clientesPF.size(); i++){
+                        
+                        clientesPF[i].exibirInformacoes();
+                        std::cout << (clientesPF.size() > 1 ? "---------------------------" : "") << std::endl;
+                    }
+
+                    std::cout << std::endl << "===Clientes Pessoa Juridica===" << std::endl;
+
+                    for(unsigned int i = 0; i < clientesPJ.size(); i++){
+                        
+                        clientesPJ[i].exibirInformacoes();
+                        std::cout << (clientesPJ.size() > 1 ? "---------------------------" : "") << std::endl;
+                    }
                     break;
                 case 3:
+                    std::cout << std::endl << "===Buscar Cliente===" << std::endl;
+
+                    std:: cout << "Informe o id do Cliente: ";
+                    std::cin >> id;
+
+                    for (unsigned int i = 0; i<clientesPF.size(); i++){
+                        if (clientesPF[i].getId() == id){
+                            clientesPF[i].exibirInformacoes();
+                            break;
+                        }
+                    }
+                    for (unsigned int i = 0; i<clientesPJ.size(); i++){
+                        if (clientesPJ[i].getId() == id){
+                            clientesPJ[i].exibirInformacoes();
+                            break;
+                        }
+                    }  
                     break;
                 case 4:
+                    std::cout << std::endl << "===Excluir Cliente===" << std::endl;
+                    std:: cout << "Informe o id do cliente: ";
+                    std::cin >> id;
+                    for (unsigned int i = 0; i<clientesPF.size(); i++){
+                        if (clientesPF[i].getId() == id){
+                            clientesPF.erase(clientesPF.begin() + id);
+                            break;
+                        }
+                    }
+                    for (unsigned int i = 0; i<clientesPJ.size(); i++){
+                        if (clientesPJ[i].getId() == id){
+                            clientesPJ.erase(clientesPJ.begin() + id);
+                            break;
+                        }
+                    }
+                    std:: cout << "Cliente excluído com sucesso!" << std::endl;
                     break;
                 case 0:
                     break;
@@ -227,7 +352,7 @@ int main() {
                     std::cout << "Opção inválida!" << std::endl;
                     break;
                 }
-            } while (menu_interno != 0);
+            } while (menu_interno!=0);
             break;
         case 3:
 			do {
