@@ -645,6 +645,7 @@ int main() {
                             venda.salvar_venda();
                             vendas.push_back(venda);
                             estoque.remover(veiculo_vendido, 1);
+                            break;
                         }
                         else if (tp == 2)
                         {
@@ -696,6 +697,7 @@ int main() {
                             venda.salvar_venda();
                             vendas.push_back(venda);
                             estoque.remover(veiculo_vendido, 1);
+                            break;
                         }
                         else{
                             break;
