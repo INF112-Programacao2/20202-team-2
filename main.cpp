@@ -366,7 +366,7 @@ int main() {
                             clientesPF[i].exibir_informacoes();
                             std::cout << (clientesPF.size() > 1 ? "---------------------------" : "") << std::endl;
                         }
-                    }
+                    } else std::cout << "Não há clientes pessoa física." << std::endl;
                     if (clientesPJ.size() > 0){
                         std::cout << std::endl << "===Clientes Pessoa Juridica===" << std::endl;
 
@@ -375,27 +375,29 @@ int main() {
                             clientesPJ[i].exibir_informacoes();
                             std::cout << (clientesPJ.size() > 1 ? "---------------------------" : "") << std::endl;
                         }
-                    }
+                    } else std::cout << "Não há clientes pessoa jurídica." << std::endl;
                     break;
                 case 3:
                     try{
                         std::cout << std::endl << "===Buscar Cliente===" << std::endl;
 
-                        std:: cout << "Informe o id do Cliente: ";
-                        std::cin >> id;
-
+                        id = input_integer("Informe o id do cliente: ", "Valor inválido.");
+                        bool clienteExiste = false;
                         for (unsigned int i = 0; i<clientesPF.size(); i++){
                             if (clientesPF[i].getId() == id){
                                 clientesPF[i].exibir_informacoes();
+                                clienteExiste = true;
                                 break;
                             }
                         }
                         for (unsigned int i = 0; i<clientesPJ.size(); i++){
                             if (clientesPJ[i].getId() == id){
                                 clientesPJ[i].exibir_informacoes();
+                                clienteExiste = true;
                                 break;
                             }
                         }  
+                        if (!clienteExiste) std::cout << "Esse cliente não existe." << std::endl;
                         break;
                     }catch(std::exception &e){
                         std::cout << "Ocorreu um erro ao buscar o cliente." << std::endl;
@@ -403,21 +405,24 @@ int main() {
                 case 4:
                     try{
                         std::cout << std::endl << "===Excluir Cliente===" << std::endl;
-                        std:: cout << "Informe o id do cliente: ";
-                        std::cin >> id;
+                        id = input_integer("Informe o id do cliente: ", "Valor inválido.");
+                        bool clienteExiste = false;
                         for (unsigned int i = 0; i<clientesPF.size(); i++){
                             if (clientesPF[i].getId() == id){
                                 clientesPF.erase(clientesPF.begin() + id);
+                                clienteExiste = true;
                                 break;
                             }
                         }
                         for (unsigned int i = 0; i<clientesPJ.size(); i++){
                             if (clientesPJ[i].getId() == id){
                                 clientesPJ.erase(clientesPJ.begin() + id);
+                                clienteExiste = true;
                                 break;
                             }
                         }
-                        std:: cout << "Cliente excluído com sucesso!" << std::endl;
+                        if (clienteExiste) std:: cout << "Cliente excluído com sucesso!" << std::endl;
+                        else std::cout << "Esse cliente não existe." << std::endl;
                         break;
                     }catch(std::exception &e){
                         std::cout << "Ocorreu um erro ao excluir o cliente." << std::endl;
