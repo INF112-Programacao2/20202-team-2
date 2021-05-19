@@ -24,3 +24,11 @@ O tema escolhido pelo grupo para a realização do trabalho foi um Sistema de Co
 	 - Moto
 - Venda
 - Estoque de Veículos
+
+## Como executar
+ Na pasta do projeto:
+ 
+ 	- Execute *make*;
+	
+	- Execute *./main*;
+ 
