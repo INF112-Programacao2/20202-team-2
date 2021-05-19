@@ -27,6 +27,6 @@ O tema escolhido pelo grupo para a realização do trabalho foi um Sistema de Co
 
 ## Como executar
  Na pasta do projeto:
- 	- Execute *make*;
-	- Execute *run*;
+ - Execute *make*;
+ - Execute *run*;
  
