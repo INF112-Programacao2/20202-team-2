@@ -13,8 +13,8 @@
 #include "estoque.h"
 #include "venda.h"
 #include "cliente.h"
-#include "clientePF.h"
-#include "clientePJ.h"
+#include "clientepf.h"
+#include "clientepj.h"
 
 int input_integer(std::string input_msg, std::string error_msg) {
      std::cout << input_msg;
@@ -45,16 +45,21 @@ int main() {
     std::vector<ClientePF> clientesPF;
     std::vector<ClientePJ> clientesPJ;
     std::vector<Venda> vendas;
+    int veiculosIds = 1;
     
-    // Veiculo *v1 = new Carro(000,"HFG-3983", 2017, "Fiat", "Argo 1.0", "Vermelho", "Flex", 39990, 4, true, true, true, "Hidráulica");
-    // Veiculo *v2 = new Carro(001,"GWS-9104", 2014, "Chevrolet", "Onix 1.4", "Chumbo,", "Flex", 35490, 4, true, true, true, "Hidráulica");
-    // Veiculo *v3 = new Moto(002, "OFK-2981", 2018, "Honda", "Bros", "Preto", "Flex", 12000, "A disco", "A disco", "Elétrica", "Eletrônica", 160);
-    // Veiculo *v4 = new Moto(003, "HPW-3489", 2019, "Honda", "Titan", "Vermelho", "Flex", 12500, "A disco", "A disco", "Elétrica", "Eletrônica", 160);
+    Veiculo *v1 = new Carro(veiculosIds,"HFG-3983", 2017, "Fiat", "Argo 1.0", "Vermelho", "Flex", 39990, 4, true, true, true, "Hidráulica");
+    veiculosIds++;
+    Veiculo *v2 = new Carro(veiculosIds,"GWS-9104", 2014, "Chevrolet", "Onix 1.4", "Chumbo,", "Flex", 35490, 4, true, true, true, "Hidráulica");
+    veiculosIds++;
+    //Veiculo *v3 = new Moto(veiculosIds.size() + 1, "OFK-2981", 2018, "Honda", "Bros", "Preto", "Flex", 12000, "A disco", "A disco", "Elétrica", "Eletrônica", 160);
+    //veiculosIds.push_back(veiculosIds.size() + 1);
+    //Veiculo *v4 = new Moto(veiculosIds.size() + 1, "HPW-3489", 2019, "Honda", "Titan", "Vermelho", "Flex", 12500, "A disco", "A disco", "Elétrica", "Eletrônica", 160);
+    //veiculosIds.push_back(veiculosIds.size() + 1);
 
-    // estoque.adicionar(v1, 1);
-    // estoque.adicionar(v2, 1);
-    // estoque.adicionar(v3, 1);
-    // estoque.adicionar(v4, 1);
+    estoque.adicionar(v1, 1);
+    estoque.adicionar(v2, 1);
+    //estoque.adicionar(v3, 1);
+    //estoque.adicionar(v4, 1);
 
     // Cliente *c = new ClientePF(001, "Márcio Correa", "(31) 99745-3710", "Rua dos Estudantes, 290", "026.347.601-63", "20/08/1995", "Solteiro");
     // Venda venda1(f,c,v1,"14/05/2021",0,"Cartão de Crédito", 39990,"Nenhuma");
@@ -457,7 +462,7 @@ int main() {
                         std::string placa, marca, modelo, cor, combustivel, tdirecao;
                         bool ac,ve,te;
 
-                        id = estoque.getNumVeiculos();
+                        id = veiculosIds;
                         std::cout << "Quantidade: ";
                         std::cin >> quantidade;
                         std::cout << "Ano: ";
@@ -486,6 +491,7 @@ int main() {
                         std::cin >> ve;
                         
                         Veiculo *v = new Carro(id, placa, ano, marca, modelo, cor, combustivel, preco, nportas, ac, ve, te, tdirecao);
+                        veiculosIds++;
                         estoque.adicionar(v, quantidade);
                     }
                     else
@@ -493,7 +499,7 @@ int main() {
                         int id, ano, preco, cilindradas, quantidade;
                         std::string placa, marca, modelo, cor, combustivel, fd, ft, partida, injecao;
 
-                        id = estoque.getNumVeiculos();
+                        id = veiculosIds;
                         
                         std::cout << "Quantidade: ";
                         std::cin >> quantidade;
@@ -523,6 +529,7 @@ int main() {
                         std::cin >> injecao;
                         
                         Veiculo *v = new Moto(id, placa, ano, marca, modelo, cor, combustivel, preco, fd, ft, partida, injecao, cilindradas);
+                        veiculosIds++;
                         estoque.adicionar(v, quantidade);
                     }
 
