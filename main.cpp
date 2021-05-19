@@ -58,7 +58,20 @@ int main() {
     //estoque.adicionar(v3, 1);
     //estoque.adicionar(v4, 1);
 
-    // Cliente *c = new ClientePF(001, "Márcio Correa", "(31) 99745-3710", "Rua dos Estudantes, 290", "026.347.601-63", "20/08/1995", "Solteiro");
+    Cliente *c1 = new ClientePF(1, "Ana Correa", "(31) 98888-3710", "Rua dos Cactos, 290", "123.347.601-63", "20/08/1995", "Solteiro(a)");
+    Cliente *c2 = new ClientePF(2, "Maria Correa", "(31) 97777-3710", "Rua dos Passaros, 290", "124.347.601-63", "21/08/1995", "Solteiro(a)");
+    Cliente *c3 = new ClientePJ(3, "Márcio Correa", "(31) 96666-3710", "Rua dos Louros, 290", "456.347.601-63");
+    Cliente *c4 = new ClientePJ(4, "Joao Correa", "(31) 95555-3710", "Rua dos Estudantes, 290", "789.347.601-63");
+/*    clientesPF.push_back(*c1);
+    clientesPF.push_back(*c2);
+    clientesPJ.push_back(*c3);
+    clientesPJ.push_back(*c4);
+    clientes.push_back(*c1);
+    clientes.push_back(*c2);
+    clientes.push_back(*c3);
+    clientes.push_back(*c4);*/
+
+    
     // Venda venda1(f,c,v1,"14/05/2021",0,"Cartão de Crédito", 39990,"Nenhuma");
     // Venda venda2(f,c,v4,"14/05/2021",0,"Cartão de Crédito", v4->getPreco(),"Nenhuma");
 
@@ -297,7 +310,7 @@ int main() {
                         std::cout << std::endl << "===Cadastrar Cliente===" << std::endl;
                         
                         int tipoCliente; // 0 - pessoa física || 1 - pessoa jurídica
-                        unsigned int idCliente = clientes.size();
+                        unsigned int idCliente = clientes.size()+1;
 
                         std::string nomeCliente;
                         std::cout << "Insira o nome: ";
