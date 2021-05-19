@@ -2,6 +2,7 @@
 #include <iomanip>
 #include <vector>
 #include <string>
+#include <limits>
 
 #include "funcionario.h"
 #include "gerente.h"
@@ -15,17 +16,24 @@
 #include "clientePF.h"
 #include "clientePJ.h"
 
-int input_menu() {
-    int x = -1;
-    while(x <= 0 || x > 4){
-            std::cin >> x;
-            if(!std::cin || x < 0 || x > 100)
-                return 0;
-            return x;
-    }
-    return 0;
-}
+int input_integer(std::string input_msg, std::string error_msg) {
+     std::cout << input_msg;
+        int auth;
+        std::cin>>auth;
+        while(1) {
+            if(std::cin.fail()) {
+                std::cin.clear();
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                std::cout << error_msg << std::endl;
+                std::cout << input_msg;
+                std::cin>>auth;
+            }
+            if(!std::cin.fail())
+                break;
+        }
 
+    return auth;
+}
 
 int main() {
 
@@ -63,27 +71,54 @@ int main() {
     // delete c;
     
     Vendedor *f1 = new Vendedor(1, "João Carlos", "045.574.329-45", "(31) 95234-1485", "Av. PH Rolfs, 1023", 2200, "0415234-4");
-    Gerente *f2 = new Gerente(2, "João asdasd", "123.574.329-45", "(33) 95234-1485", "Av. PH Rolfs, 1023", 2200, "0415234-4");
+    Gerente *f2 = new Gerente(2, "José Júlio", "123.574.329-45", "(33) 95234-1485", "Av. PH Rolfs, 1023", 2200, "0415234-4");
     vendedores.push_back(*f1);
     gerentes.push_back(*f2);
     funcionarios.push_back(*f1);
     funcionarios.push_back(*f2);
 
-    std::cout << "Sistema de Concessionária" << std::endl;
     int menu_principal;
     int menu_interno;
     int id;
+    int tipo_funcionario = 0; // 1 - gerente || 2 - vendedor
+    Funcionario *funcionario_sistema;
 
     do {
+        int auth = input_integer("Informe seu ID para acessar o sistema: ", "Não foi encontrado funcionário com esse ID!");
+        
+        for(unsigned int i = 0; i < gerentes.size(); i++){
+            if(gerentes[i].getId() == auth){
+                tipo_funcionario = 1;
+                funcionario_sistema = &gerentes[i];
+            }
+        }
+        
+        for(unsigned int i = 0; i < vendedores.size(); i++){
+            if(vendedores[i].getId() == auth){
+                tipo_funcionario = 2;
+                funcionario_sistema = &vendedores[i];
+            }
+        }
+
+        if(tipo_funcionario != 1 && tipo_funcionario != 2)
+            std::cout << "Não foi encontrado funcionário com esse ID!" << std::endl;
+    } while(tipo_funcionario != 1 && tipo_funcionario != 2);
+
+
+    std::cout << std::endl << "Sistema de Concessionária" << std::endl;
+    std::cout << std::endl << "Bem Vindo(a), " << (tipo_funcionario == 1 ? "gerente " : "vendedor ") << funcionario_sistema->getNome() << std::endl;
+    do {
         std::cout << std::endl << "===Menu Principal===" << std::endl;
-        std::cout << "1 - Gerenciar Funcionários" << std::endl;
+        if(tipo_funcionario == 1) std::cout << "1 - Gerenciar Funcionários" << std::endl; // TODO remover vendedor
         std::cout << "2 - Gerenciar Clientes" << std::endl;
         std::cout << "3 - Gerenciar Estoque" << std::endl;
         std::cout << "4 - Gerenciar Vendas" << std::endl;
         std::cout << "0 - Sair" << std::endl;
 
-        std::cout << std::endl << "Insira uma opção: ";
-        menu_principal = input_menu();
+        menu_principal = input_integer("Insira uma opção: ", "É necessário inserir um número!");
+
+        // Barrar vendedor de acessar gerenciar funcionários
+        if(tipo_funcionario == 2 && menu_principal == 1) menu_principal = 5;
 
         switch (menu_principal) {
 		case 1:
@@ -95,14 +130,13 @@ int main() {
                 std::cout << "4 - Excluir Funcionário" << std::endl;
                 std::cout << "0 - Voltar" << std::endl;
 
-                std::cout << std::endl << "Insira uma opção: ";
-                menu_interno = input_menu();
+                menu_interno = input_integer("Insira uma opção: ", "É necessário inserir um número!");
 
                 switch (menu_interno) {
                 case 1: {
                     std::cout << std::endl << "===Cadastrar Funcionário===" << std::endl;
                     try {
-                        int tipo; // 0 - gerente || 1 - vendedor
+                        int tipo; // 1 - gerente || 2 - vendedor
                         int id = funcionarios.size() == 0 ? 1: funcionarios[funcionarios.size()-1].getId() + 1;
 
                         std::string nome;
@@ -135,11 +169,11 @@ int main() {
                         std::cout << "Insira o tipo (0 - Gerente, 1 - vendedor): ";
                         std::cin >> tipo;
 
-                        if(tipo == 0){
+                        if(tipo == 1){
                             Gerente f(id, nome, cpf, telefone, endereco, salario, conta);
                             gerentes.push_back(f);
                             funcionarios.push_back(f);
-                        } else if (tipo == 1){
+                        } else if (tipo == 2){
                             Vendedor f(id, nome, cpf, telefone, endereco, salario, conta);
                             vendedores.push_back(f);
                             funcionarios.push_back(f);
@@ -181,8 +215,7 @@ int main() {
                 case 3:
                     std::cout << std::endl << "===Buscar Funcionário===" << std::endl;
                     try {
-                        std::cout << "Informe o id do Funcionário: ";
-                        std::cin >> id;
+                        id = input_integer("Informe o id do Funcionário: ", "Informe um id válido!");
                         bool verifica_busca = false;
 
                         for(Gerente gerente:gerentes){
@@ -216,8 +249,7 @@ int main() {
                 case 4:
                     std::cout << std::endl << "===Excluir Funcionário===" << std::endl;
                     try{
-                        std:: cout << "Informe o id do Funcionário: ";
-                        std::cin >> id;
+                        id = input_integer("Informe o id do Funcionário: ", "Informe um id válido!");
                         bool verifica_delecao = false;
                             for(unsigned int i = 0; i < vendedores.size(); i++)
                                 if(vendedores[i].getId() == id){
@@ -254,8 +286,7 @@ int main() {
                 std::cout << "4 - Excluir Cliente" << std::endl;
                 std::cout << "0 - Voltar" << std::endl;
 
-                std::cout << std::endl << "Insira uma opção: ";
-                std::cin >> menu_interno;
+                menu_interno = input_integer("Insira uma opção: ", "É necessário inserir um número!");
 
                 switch (menu_interno) {
                 case 1:{
@@ -392,8 +423,7 @@ int main() {
                 std::cout << "4 - Remover Veículo" << std::endl;
                 std::cout << "0 - Voltar" << std::endl;
 
-                std::cout << std::endl << "Insira uma opção: ";
-                menu_interno = input_menu();
+                menu_interno = input_integer("Insira uma opção: ", "É necessário inserir um número!");
 
                 switch (menu_interno) {
                 case 1:
@@ -518,11 +548,13 @@ int main() {
                 std::cout << "1 - Cadastrar Venda" << std::endl;
                 std::cout << "2 - Listar Vendas" << std::endl;
                 std::cout << "3 - Buscar Venda" << std::endl;
-                std::cout << "4 - Excluir Venda" << std::endl;
+                if(tipo_funcionario == 1) std::cout << "4 - Excluir Venda" << std::endl;
                 std::cout << "0 - Voltar" << std::endl;
 
-                std::cout << std::endl << "Insira uma opção: ";
-                menu_interno = input_menu();
+                menu_interno = input_integer("Insira uma opção: ", "É necessário inserir um número!");
+
+                // Barrar vendedor de acessar excluir venda
+                if(tipo_funcionario == 2 && menu_interno == 4) menu_interno = 5;
 
                 switch (menu_interno) {
                 case 1:
@@ -590,7 +622,10 @@ int main() {
 			std::cout << "Opção inválida!" << std::endl;
             break;
 		}
-    } while (menu_principal != 0);
+    } while (menu_principal != 0 && (tipo_funcionario == 1 || tipo_funcionario == 2));
+
+    delete f1;
+    delete f2;
 
     return 0;
 }
