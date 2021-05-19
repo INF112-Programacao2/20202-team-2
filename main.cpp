@@ -28,6 +28,7 @@ int input_menu() {
 
 
 int main() {
+
     Estoque estoque;
     std::vector<Funcionario> funcionarios;
     std::vector<Gerente> gerentes;
@@ -35,7 +36,7 @@ int main() {
     std::vector<Cliente> clientes;
     std::vector<ClientePF> clientesPF;
     std::vector<ClientePJ> clientesPJ;
-
+    
     // Veiculo *v1 = new Carro(000,"HFG-3983", 2017, "Fiat", "Argo 1.0", "Vermelho", "Flex", 39990, 4, true, true, true, "Hidráulica");
     // Veiculo *v2 = new Carro(001,"GWS-9104", 2014, "Chevrolet", "Onix 1.4", "Chumbo,", "Flex", 35490, 4, true, true, true, "Hidráulica");
     // Veiculo *v3 = new Moto(002, "OFK-2981", 2018, "Honda", "Bros", "Preto", "Flex", 12000, "A disco", "A disco", "Elétrica", "Eletrônica", 160);
@@ -232,7 +233,7 @@ int main() {
                     std::cout << std::endl << "===Cadastrar Cliente===" << std::endl;
                     
                     int tipoCliente; // 0 - pessoa física || 1 - pessoa jurídica
-                    unsigned int idCliente = clientes.size() + 1;
+                    unsigned int idCliente = clientes.size();
 
                     std::string nomeCliente;
                     std::cout << "Insira o nome: ";
