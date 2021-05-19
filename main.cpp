@@ -36,6 +36,7 @@ int main() {
     std::vector<Cliente> clientes;
     std::vector<ClientePF> clientesPF;
     std::vector<ClientePJ> clientesPJ;
+    std::vector<Venda> vendas;
     
     // Veiculo *v1 = new Carro(000,"HFG-3983", 2017, "Fiat", "Argo 1.0", "Vermelho", "Flex", 39990, 4, true, true, true, "Hidráulica");
     // Veiculo *v2 = new Carro(001,"GWS-9104", 2014, "Chevrolet", "Onix 1.4", "Chumbo,", "Flex", 35490, 4, true, true, true, "Hidráulica");
@@ -498,11 +499,53 @@ int main() {
                 switch (menu_interno) {
                 case 1:
                     break;
-                case 2:
+                case 2:{
+                    if (vendas.size() == 0)
+                    {
+                        std::cout << "Nenhuma venda registrada." << std::endl;
+                        break;
+                    }
+
+                    for (unsigned int i=0; i<vendas.size(); i++)
+                        vendas[i].imprimir_informacoes();
+                }
                     break;
-                case 3:
+                case 3:{
+                        std::cout << "Digite o nome do funcionário responsável, o modelo do veículo ou o nome do cliente: " << std::endl;
+                        std::string entrada;
+                        std::cin.ignore();
+                        std::getline(std::cin, entrada);
+
+                        bool encontrado = false;
+                        for (unsigned int i=0; i<vendas.size(); i++)
+                        {
+                            if (entrada == vendas[i].get_funcionario()->getNome() || entrada == vendas[i].get_veiculo_vendido()->getModelo() || entrada == vendas[i].get_cliente()->getNome())
+                            {
+                                vendas[i].imprimir_informacoes();
+                                encontrado = true;
+                            }
+                        }
+                        if (encontrado == false)
+                            std::cout << "Nenhuma venda encontrada com o termo '" << entrada << "'" << std::endl;
+                }
                     break;
-                case 4:
+                case 4:{
+                    std::cout << "Digite o id da venda que deseja excluir: ";
+                    int num;
+                    std::cin >> num;
+                    for (unsigned int i=0; i<vendas.size(); i++)
+                    {
+                        if (num == vendas[i].get_id())
+                        {
+                            vendas.erase(vendas.begin()+i);
+                            std::cout << "Venda excluída com sucesso." << std::endl;
+                            break;
+                        }
+                        if (i==vendas.size()-1)
+                            std::cout << "Nenhuma venda localizada com esse id." << std::endl;
+                    }
+
+                }
                     break;
                 case 0:
                     break;
