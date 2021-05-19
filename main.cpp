@@ -55,35 +55,19 @@ int main() {
 
     estoque.adicionar(v1, 1);
     estoque.adicionar(v2, 1);
-    //estoque.adicionar(v3, 1);
-    //estoque.adicionar(v4, 1);
 
-    Cliente *c1 = new ClientePF(1, "Ana Correa", "(31) 98888-3710", "Rua dos Cactos, 290", "123.347.601-63", "20/08/1995", "Solteiro(a)");
-    Cliente *c2 = new ClientePF(2, "Maria Correa", "(31) 97777-3710", "Rua dos Passaros, 290", "124.347.601-63", "21/08/1995", "Solteiro(a)");
-    Cliente *c3 = new ClientePJ(3, "Márcio Correa", "(31) 96666-3710", "Rua dos Louros, 290", "456.347.601-63");
-    Cliente *c4 = new ClientePJ(4, "Joao Correa", "(31) 95555-3710", "Rua dos Estudantes, 290", "789.347.601-63");
-/*    clientesPF.push_back(*c1);
+    ClientePF *c1 = new ClientePF(1, "Ana Correa", "(31) 98888-3710", "Rua dos Cactos, 290", "123.347.601-63", "20/08/1995", "Solteiro(a)");
+    ClientePF *c2 = new ClientePF(2, "Maria Correa", "(31) 97777-3710", "Rua dos Passaros, 290", "124.347.601-63", "21/08/1995", "Solteiro(a)");
+    ClientePJ *c3 = new ClientePJ(3, "Márcio Correa", "(31) 96666-3710", "Rua dos Louros, 290", "456.347.601-63");
+    ClientePJ *c4 = new ClientePJ(4, "Joao Correa", "(31) 95555-3710", "Rua dos Estudantes, 290", "789.347.601-63");
+    clientesPF.push_back(*c1);
     clientesPF.push_back(*c2);
     clientesPJ.push_back(*c3);
     clientesPJ.push_back(*c4);
     clientes.push_back(*c1);
     clientes.push_back(*c2);
     clientes.push_back(*c3);
-    clientes.push_back(*c4);*/
-
-    
-    // Venda venda1(f,c,v1,"14/05/2021",0,"Cartão de Crédito", 39990,"Nenhuma");
-    // Venda venda2(f,c,v4,"14/05/2021",0,"Cartão de Crédito", v4->getPreco(),"Nenhuma");
-
-    // venda1.salvar_venda();
-    // venda2.salvar_venda();
-
-    // delete v1;
-    // delete v2;
-    // delete v3;
-    // delete v4;
-    // delete f;
-    // delete c;
+    clientes.push_back(*c4);
     
     Vendedor *f1 = new Vendedor(1, "João Carlos", "045.574.329-45", "(31) 95234-1485", "Av. PH Rolfs, 1023", 2200, "0415234-4");
     Gerente *f2 = new Gerente(2, "José Júlio", "123.574.329-45", "(33) 95234-1485", "Av. PH Rolfs, 1023", 2200, "0415234-4");
@@ -97,6 +81,7 @@ int main() {
     int id;
     int id_v = 0;
     int tipo_funcionario = 0; // 1 - gerente || 2 - vendedor
+    
     Funcionario *funcionario_sistema;
 
     do {
