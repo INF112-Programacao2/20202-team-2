@@ -167,7 +167,7 @@ int main() {
                         std::cin.ignore();
                         std::getline(std::cin, conta);
 
-                        std::cout << "Insira o tipo (0 - Gerente, 1 - vendedor): ";
+                        std::cout << "Insira o tipo (1 - Gerente, 2 - vendedor): ";
                         std::cin >> tipo;
 
                         if(tipo == 1){
@@ -182,33 +182,40 @@ int main() {
                             throw std::exception();
                         } 
                     } catch (std::exception &e){
-                        std::cout << "Ocorreu um erro ao cadastrar funcionário" << std::endl;
+                        std::cout << "Ocorreu um erro ao cadastrar funcionário" << e.what() << std::endl;
                     }
                 }
                     break;
                 case 2:
                     std::cout << std::endl << "===Listar Funcionários===" << std::endl;
                     try{
-                        for(Gerente gerente:gerentes){
-                            std::cout << "ID: " << gerente.getId() << std::endl;
-                            std::cout << "NOME: " << gerente.getNome() << std::endl;
-                            std::cout << "CPF: " << gerente.getCpf() << std::endl;
-                            std::cout << "TELEFONE: " << gerente.getTelefone() << std::endl;
-                            std::cout << "ENDEREÇO: " << gerente.getEndereco() << std::endl;
-                            std::cout << "SALÁRIO: " << gerente.getSalario() << std::endl;
-                            std::cout << "CONTA: " << gerente.getConta() << std::endl;
-                            std::cout << (funcionarios.size() > 1 ? "---------------------------" : "") << std::endl;
-                        }
-                        for(Vendedor vendedor:vendedores){
-                            std::cout << "ID: " << vendedor.getId() << std::endl;
-                            std::cout << "NOME: " << vendedor.getNome() << std::endl;
-                            std::cout << "CPF: " << vendedor.getCpf() << std::endl;
-                            std::cout << "TELEFONE: " << vendedor.getTelefone() << std::endl;
-                            std::cout << "ENDEREÇO: " << vendedor.getEndereco() << std::endl;
-                            std::cout << "SALÁRIO: " << vendedor.getSalario() << std::endl;
-                            std::cout << "CONTA: " << vendedor.getConta() << std::endl;
-                            std::cout << (funcionarios.size() > 1 ? "---------------------------" : "") << std::endl;
-                        }
+                        if (gerentes.size() > 0){
+                            std::cout << std::endl << "===Gerentes===" << std::endl;
+                            for(Gerente gerente:gerentes){
+                                std::cout << "ID: " << gerente.getId() << std::endl;
+                                std::cout << "NOME: " << gerente.getNome() << std::endl;
+                                std::cout << "CPF: " << gerente.getCpf() << std::endl;
+                                std::cout << "TELEFONE: " << gerente.getTelefone() << std::endl;
+                                std::cout << "ENDEREÇO: " << gerente.getEndereco() << std::endl;
+                                std::cout << "SALÁRIO: " << gerente.getSalario() << std::endl;
+                                std::cout << "CONTA: " << gerente.getConta() << std::endl;
+                                std::cout << (gerentes.size() > 1 ? "---------------------------" : "") << std::endl;
+                            }
+                        } else std::cout << "Não há gerentes cadastrados." << std::endl;
+                        
+                        if (vendedores.size() > 0){
+                            std::cout << std::endl << "===Vendedores===" << std::endl;
+                            for(Vendedor vendedor:vendedores){
+                                std::cout << "ID: " << vendedor.getId() << std::endl;
+                                std::cout << "NOME: " << vendedor.getNome() << std::endl;
+                                std::cout << "CPF: " << vendedor.getCpf() << std::endl;
+                                std::cout << "TELEFONE: " << vendedor.getTelefone() << std::endl;
+                                std::cout << "ENDEREÇO: " << vendedor.getEndereco() << std::endl;
+                                std::cout << "SALÁRIO: " << vendedor.getSalario() << std::endl;
+                                std::cout << "CONTA: " << vendedor.getConta() << std::endl;
+                                std::cout << (vendedores.size() > 1 ? "---------------------------" : "") << std::endl;
+                            }
+                        } else std::cout << "Não há vendedores cadastrados." << std::endl;
                     } catch (std::exception &e){
                         std::cout << "Ocorreu um erro ao listar funcionário: " << std::endl;
                     }
@@ -628,7 +635,6 @@ int main() {
                             std::cin.ignore();
                             std::getline(std::cin, formapg);
                             std::cout <<"Alguma observação?: ";
-                            std::cin.ignore();
                             std::getline(std::cin, obs);
 
                             struct tm *data_hora;      
@@ -644,6 +650,7 @@ int main() {
                             Venda venda(id_v, funcionario_sistema, cliente_atendido, veiculo_vendido, data, desconto, formapg, valorfinal, obs);
                             venda.salvar_venda();
                             vendas.push_back(venda);
+                            id_v++;
                             estoque.remover(veiculo_vendido, 1);
                             break;
                         }
@@ -680,7 +687,6 @@ int main() {
                             std::cin.ignore();
                             std::getline(std::cin, formapg);
                             std::cout <<"Alguma observação?: ";
-                            std::cin.ignore();
                             std::getline(std::cin, obs);
 
                             struct tm *data_hora;      
@@ -696,6 +702,7 @@ int main() {
                             Venda venda(id_v, funcionario_sistema, cliente_atendido, veiculo_vendido, data, desconto, formapg, valorfinal, obs);
                             venda.salvar_venda();
                             vendas.push_back(venda);
+                            id_v++;
                             estoque.remover(veiculo_vendido, 1);
                             break;
                         }
