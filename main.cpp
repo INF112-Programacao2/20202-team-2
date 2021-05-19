@@ -259,122 +259,139 @@ int main() {
 
                 switch (menu_interno) {
                 case 1:{
-                    std::cout << std::endl << "===Cadastrar Cliente===" << std::endl;
-                    
-                    int tipoCliente; // 0 - pessoa física || 1 - pessoa jurídica
-                    unsigned int idCliente = clientes.size();
-
-                    std::string nomeCliente;
-                    std::cout << "Insira o nome: ";
-                    std::cin.ignore();
-                    std::getline(std::cin, nomeCliente);
-
-                    std::string telefoneCliente;
-                    std::cout << "Insira o telefone (sem espaços): ";
-                    std::cin >> telefoneCliente; 
-
-                    std::string enderecoCliente;
-                    std::cout << "Insira o endereço: ";
-                    std::cin.ignore();
-                    std::getline(std::cin, enderecoCliente);
-
-                    std::cout << "Pessoa Fisica (1) ou Pessoa Juridica (0): ";
-                    std::cin >> tipoCliente;
-                    if (tipoCliente == 1){
-                        std::string cpfCliente; 
-                        std::cout << "Insira o CPF: ";
-                        std::cin.ignore();
-                        std::getline(std::cin, cpfCliente);
-
-                        std::string estadosCivis[5] = {"Solteiro(a)", "Casado(a)", "Divorciado(a)", "Viuvo(a)", "Outro"};
-
-                        int codEstadoCivilCliente;
-                        std::string estadoCivilCliente;
-                        for (int i = 0; i<5; i++) std::cout << i << " - " << estadosCivis[i] << std::endl;
-                        std::cout << "Insira o estado civil: ";
-                        std::cin >> codEstadoCivilCliente;
-                        estadoCivilCliente = estadosCivis[codEstadoCivilCliente];
-
-
-                        std::string dataNascimentoCliente; 
-                        std::cout << "Insira a data de nascimento: ";
-                        std::cin.ignore();
-                        std::getline(std::cin, dataNascimentoCliente);
-
-                        ClientePF c(idCliente, nomeCliente, telefoneCliente, enderecoCliente, cpfCliente, dataNascimentoCliente, estadoCivilCliente);
-                        clientes.push_back(c);
-                        clientesPF.push_back(c);
+                    try{
+                        std::cout << std::endl << "===Cadastrar Cliente===" << std::endl;
                         
+                        int tipoCliente; // 0 - pessoa física || 1 - pessoa jurídica
+                        unsigned int idCliente = clientes.size();
 
-                    } else if (tipoCliente==0){
-
-                        std::string cnpjCliente; 
-                        std::cout << "Insira o CNPJ: ";
+                        std::string nomeCliente;
+                        std::cout << "Insira o nome: ";
                         std::cin.ignore();
-                        std::getline(std::cin, cnpjCliente);
+                        std::getline(std::cin, nomeCliente);
 
-                        ClientePJ c(id, nomeCliente, telefoneCliente, enderecoCliente, cnpjCliente);
-                        clientes.push_back(c);
-                        clientesPJ.push_back(c);
-                    }  
+                        std::string telefoneCliente;
+                        std::cout << "Insira o telefone (sem espaços): ";
+                        std::cin >> telefoneCliente; 
+
+                        std::string enderecoCliente;
+                        std::cout << "Insira o endereço: ";
+                        std::cin.ignore();
+                        std::getline(std::cin, enderecoCliente);
+
+                        std::cout << "Pessoa Fisica (1) ou Pessoa Juridica (0): ";
+                        std::cin >> tipoCliente;
+                        if (tipoCliente == 1){
+                            std::string cpfCliente; 
+                            std::cout << "Insira o CPF: ";
+                            std::cin.ignore();
+                            std::getline(std::cin, cpfCliente);
+
+                            std::string estadosCivis[5] = {"Solteiro(a)", "Casado(a)", "Divorciado(a)", "Viuvo(a)", "Outro"};
+
+                            int codEstadoCivilCliente;
+                            std::string estadoCivilCliente;
+                            for (int i = 0; i<5; i++) std::cout << i << " - " << estadosCivis[i] << std::endl;
+                            std::cout << "Insira o estado civil: ";
+                            std::cin >> codEstadoCivilCliente;
+                            estadoCivilCliente = estadosCivis[codEstadoCivilCliente];
+
+
+                            std::string dataNascimentoCliente; 
+                            std::cout << "Insira a data de nascimento: ";
+                            std::cin.ignore();
+                            std::getline(std::cin, dataNascimentoCliente);
+
+                            ClientePF c(idCliente, nomeCliente, telefoneCliente, enderecoCliente, cpfCliente, dataNascimentoCliente, estadoCivilCliente);
+                            clientes.push_back(c);
+                            clientesPF.push_back(c);
+                            
+
+                        } else if (tipoCliente==0){
+
+                            std::string cnpjCliente; 
+                            std::cout << "Insira o CNPJ: ";
+                            std::cin.ignore();
+                            std::getline(std::cin, cnpjCliente);
+
+                            ClientePJ c(idCliente, nomeCliente, telefoneCliente, enderecoCliente, cnpjCliente);
+                            clientes.push_back(c);
+                            clientesPJ.push_back(c);
+                        }  
+                    }catch(std::exception &e){
+                        std::cout << "Ocorreu um erro ao cadastrar o cliente." << std::endl;
+                    }
                 }
                     break;
                 case 2:
                     std::cout << std::endl << "===Listar Clientes===" << std::endl;
 
-                    std::cout << std::endl << "===Clientes Pessoa Fisica===" << std::endl;
+                    if (clientesPF.size() > 0){
 
-                    for(unsigned int i = 0; i < clientesPF.size(); i++){
-                        
-                        clientesPF[i].exibirInformacoes();
-                        std::cout << (clientesPF.size() > 1 ? "---------------------------" : "") << std::endl;
+                        std::cout << std::endl << "===Clientes Pessoa Fisica===" << std::endl;
+
+                        for(unsigned int i = 0; i < clientesPF.size(); i++){
+                            
+                            clientesPF[i].exibir_informacoes();
+                            std::cout << (clientesPF.size() > 1 ? "---------------------------" : "") << std::endl;
+                        }
                     }
+                    if (clientesPJ.size() > 0){
+                        std::cout << std::endl << "===Clientes Pessoa Juridica===" << std::endl;
 
-                    std::cout << std::endl << "===Clientes Pessoa Juridica===" << std::endl;
-
-                    for(unsigned int i = 0; i < clientesPJ.size(); i++){
-                        
-                        clientesPJ[i].exibirInformacoes();
-                        std::cout << (clientesPJ.size() > 1 ? "---------------------------" : "") << std::endl;
+                        for(unsigned int i = 0; i < clientesPJ.size(); i++){
+                            
+                            clientesPJ[i].exibir_informacoes();
+                            std::cout << (clientesPJ.size() > 1 ? "---------------------------" : "") << std::endl;
+                        }
                     }
                     break;
+
                 case 3:
-                    std::cout << std::endl << "===Buscar Cliente===" << std::endl;
+                    try{
+                        std::cout << std::endl << "===Buscar Cliente===" << std::endl;
 
-                    std:: cout << "Informe o id do Cliente: ";
-                    std::cin >> id;
+                        std:: cout << "Informe o id do Cliente: ";
+                        std::cin >> id;
 
-                    for (unsigned int i = 0; i<clientesPF.size(); i++){
-                        if (clientesPF[i].getId() == id){
-                            clientesPF[i].exibirInformacoes();
-                            break;
+                        for (unsigned int i = 0; i<clientesPF.size(); i++){
+                            if (clientesPF[i].getId() == id){
+                                clientesPF[i].exibir_informacoes();
+                                break;
+                            }
                         }
+                        for (unsigned int i = 0; i<clientesPJ.size(); i++){
+                            if (clientesPJ[i].getId() == id){
+                                clientesPJ[i].exibir_informacoes();
+                                break;
+                            }
+                        }  
+                        break;
+                    }catch(std::exception &e){
+                        std::cout << "Ocorreu um erro ao buscar o cliente." << std::endl;
                     }
-                    for (unsigned int i = 0; i<clientesPJ.size(); i++){
-                        if (clientesPJ[i].getId() == id){
-                            clientesPJ[i].exibirInformacoes();
-                            break;
-                        }
-                    }  
-                    break;
                 case 4:
-                    std::cout << std::endl << "===Excluir Cliente===" << std::endl;
-                    std:: cout << "Informe o id do cliente: ";
-                    std::cin >> id;
-                    for (unsigned int i = 0; i<clientesPF.size(); i++){
-                        if (clientesPF[i].getId() == id){
-                            clientesPF.erase(clientesPF.begin() + id);
-                            break;
+                    try{
+                        std::cout << std::endl << "===Excluir Cliente===" << std::endl;
+                        std:: cout << "Informe o id do cliente: ";
+                        std::cin >> id;
+                        for (unsigned int i = 0; i<clientesPF.size(); i++){
+                            if (clientesPF[i].getId() == id){
+                                clientesPF.erase(clientesPF.begin() + id);
+                                break;
+                            }
                         }
-                    }
-                    for (unsigned int i = 0; i<clientesPJ.size(); i++){
-                        if (clientesPJ[i].getId() == id){
-                            clientesPJ.erase(clientesPJ.begin() + id);
-                            break;
+                        for (unsigned int i = 0; i<clientesPJ.size(); i++){
+                            if (clientesPJ[i].getId() == id){
+                                clientesPJ.erase(clientesPJ.begin() + id);
+                                break;
+                            }
                         }
+                        std:: cout << "Cliente excluído com sucesso!" << std::endl;
+                        break;
+                    }catch(std::exception &e){
+                        std::cout << "Ocorreu um erro ao excluir o cliente." << std::endl;
                     }
-                    std:: cout << "Cliente excluído com sucesso!" << std::endl;
-                    break;
                 case 0:
                     break;
                 default:

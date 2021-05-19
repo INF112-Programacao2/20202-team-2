@@ -13,7 +13,6 @@ class ClientePF : public Cliente{
 
     public:
         ClientePF(int id, std::string nome, std::string telefone, std::string endereco, std::string cpf, std::string dataNascimento, std::string estadoCivil);
-        ~ClientePF() {};
 
         std::string getCpf();
         std::string getDataNascimento();
@@ -22,7 +21,7 @@ class ClientePF : public Cliente{
         void setCpf(std::string cpf);
         void setDataNascimento(std::string dataNascimento);
         void setEstadoCivil(std::string estadoCivil);
-        void exibirInformacoes();
+        void exibir_informacoes();
 };
 
 #endif

@@ -11,12 +11,11 @@ class ClientePJ : public Cliente{
 
     public:
         ClientePJ(int id, std::string nome, std::string telefone, std::string endereco, std::string cnpj);
-        ~ClientePJ() {};
 
         std::string getCnpj();
 
         void setCnpj(std::string cnpj);
-        void exibirInformacoes();
+        void exibir_informacoes();
 };
 
 #endif

@@ -23,7 +23,7 @@ class Cliente{
         void setTelefone(std::string telefone);
         void setEndereco(std::string endereco);
 
-        void exibirInformacoes();
+        void exibir_informacoes();
 };
 
 #endif

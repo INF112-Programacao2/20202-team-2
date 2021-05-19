@@ -14,7 +14,7 @@ void ClientePJ::setCnpj(std::string cnpj){
   	_cnpj = cnpj;
 }
 
-void ClientePJ::exibirInformacoes(){
+void ClientePJ::exibir_informacoes(){
 	std::cout << "ID: " << getId() << std::endl;
 	std::cout << "NOME: " << getNome() << std::endl;
 	std::cout << "CNPJ: " << getCnpj() << std::endl;

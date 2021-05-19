@@ -31,7 +31,7 @@ void ClientePF::setEstadoCivil(std::string estadoCivil){
     _estadoCivil = estadoCivil;
 }
 
-void ClientePF::exibirInformacoes(){
+void ClientePF::exibir_informacoes(){
     std::cout << "ID: " << getId() << std::endl;
     std::cout << "NOME: " << getNome() << std::endl;
     std::cout << "CPF: " << getCpf() << std::endl;
