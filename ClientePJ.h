@@ -11,7 +11,7 @@ class ClientePJ : public Cliente{
 
     public:
         ClientePJ(int id, std::string nome, std::string telefone, std::string endereco, std::string cnpj);
-        // ~ClientePJ() {};
+        ~ClientePJ() {};
 
         std::string getCnpj();
 

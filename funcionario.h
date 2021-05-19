@@ -1,10 +1,8 @@
 #ifndef FUNCIONARIO_H
 #define FUNCIONARIO_H
 
-// #include "funcionarioIF.h"
 #include <string>
 
-// class Produto: public ProdutoIF {
 class Funcionario {
     protected:
         int _id;

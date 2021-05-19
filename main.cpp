@@ -28,44 +28,43 @@ int input_menu() {
 
 
 int main() {
-
     Estoque estoque;
-    Veiculo *v1 = new Carro(000,"HFG-3983", 2017, "Fiat", "Argo 1.0", "Vermelho", "Flex", 39990, 4, true, true, true, "Hidráulica");
-    Veiculo *v2 = new Carro(001,"GWS-9104", 2014, "Chevrolet", "Onix 1.4", "Chumbo,", "Flex", 35490, 4, true, true, true, "Hidráulica");
-    Veiculo *v3 = new Moto(002, "OFK-2981", 2018, "Honda", "Bros", "Preto", "Flex", 12000, "A disco", "A disco", "Elétrica", "Eletrônica", 160);
-    Veiculo *v4 = new Moto(003, "HPW-3489", 2019, "Honda", "Titan", "Vermelho", "Flex", 12500, "A disco", "A disco", "Elétrica", "Eletrônica", 160);
-
-    estoque.adicionar(v1, 1);
-    estoque.adicionar(v2, 1);
-    estoque.adicionar(v3, 1);
-    estoque.adicionar(v4, 1);
-
-    Funcionario *f = new Vendedor(1, "João Carlos", "045.574.329-45", "(31) 95234-1485", "Av. PH Rolfs, 1023", 2200, "0415234-4");
-    Funcionario *f1 = new Vendedor(1, "João Carlos", "045.574.329-45", "(31) 95234-1485", "Av. PH Rolfs, 1023", 2200, "0415234-4");
-    Funcionario *f2 = new Vendedor(2, "João asdasd", "123.574.329-45", "(33) 95234-1485", "Av. PH Rolfs, 1023", 2200, "0415234-4");
-    Cliente *c = new ClientePF(001, "Márcio Correa", "(31) 99745-3710", "Rua dos Estudantes, 290", "026.347.601-63", "20/08/1995", "Solteiro");
-    Venda venda1(f,c,v1,"14/05/2021",0,"Cartão de Crédito", 39990,"Nenhuma");
-    Venda venda2(f,c,v4,"14/05/2021",0,"Cartão de Crédito", v4->getPreco(),"Nenhuma");
-
-    venda1.salvar_venda();
-    venda2.salvar_venda();
-
-    delete v1;
-    delete v2;
-    delete v3;
-    delete v4;
-    delete f;
-    delete c;
-
     std::vector<Funcionario> funcionarios;
     std::vector<Gerente> gerentes;
     std::vector<Vendedor> vendedores;
     std::vector<Cliente> clientes;
     std::vector<ClientePF> clientesPF;
     std::vector<ClientePJ> clientesPJ;
+
+    // Veiculo *v1 = new Carro(000,"HFG-3983", 2017, "Fiat", "Argo 1.0", "Vermelho", "Flex", 39990, 4, true, true, true, "Hidráulica");
+    // Veiculo *v2 = new Carro(001,"GWS-9104", 2014, "Chevrolet", "Onix 1.4", "Chumbo,", "Flex", 35490, 4, true, true, true, "Hidráulica");
+    // Veiculo *v3 = new Moto(002, "OFK-2981", 2018, "Honda", "Bros", "Preto", "Flex", 12000, "A disco", "A disco", "Elétrica", "Eletrônica", 160);
+    // Veiculo *v4 = new Moto(003, "HPW-3489", 2019, "Honda", "Titan", "Vermelho", "Flex", 12500, "A disco", "A disco", "Elétrica", "Eletrônica", 160);
+
+    // estoque.adicionar(v1, 1);
+    // estoque.adicionar(v2, 1);
+    // estoque.adicionar(v3, 1);
+    // estoque.adicionar(v4, 1);
+
+    // Funcionario *f = new Vendedor(1, "João Carlos", "045.574.329-45", "(31) 95234-1485", "Av. PH Rolfs, 1023", 2200, "0415234-4");
+    // Funcionario *f1 = new Vendedor(1, "João Carlos", "045.574.329-45", "(31) 95234-1485", "Av. PH Rolfs, 1023", 2200, "0415234-4");
+    // Funcionario *f2 = new Vendedor(2, "João asdasd", "123.574.329-45", "(33) 95234-1485", "Av. PH Rolfs, 1023", 2200, "0415234-4");
+    // Cliente *c = new ClientePF(001, "Márcio Correa", "(31) 99745-3710", "Rua dos Estudantes, 290", "026.347.601-63", "20/08/1995", "Solteiro");
+    // Venda venda1(f,c,v1,"14/05/2021",0,"Cartão de Crédito", 39990,"Nenhuma");
+    // Venda venda2(f,c,v4,"14/05/2021",0,"Cartão de Crédito", v4->getPreco(),"Nenhuma");
+
+    // venda1.salvar_venda();
+    // venda2.salvar_venda();
+
+    // delete v1;
+    // delete v2;
+    // delete v3;
+    // delete v4;
+    // delete f;
+    // delete c;
     
-    funcionarios.push_back(*f1);
-    funcionarios.push_back(*f2);
+    // funcionarios.push_back(*f1);
+    // funcionarios.push_back(*f2);
 
     std::cout << "Sistema de Concessionária" << std::endl;
     int menu_principal;
@@ -233,7 +232,7 @@ int main() {
                     std::cout << std::endl << "===Cadastrar Cliente===" << std::endl;
                     
                     int tipoCliente; // 0 - pessoa física || 1 - pessoa jurídica
-                    unsigned int idCliente = clientes.size();
+                    unsigned int idCliente = clientes.size() + 1;
 
                     std::string nomeCliente;
                     std::cout << "Insira o nome: ";

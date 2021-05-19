@@ -12,7 +12,6 @@ class Cliente{
 
     public:
         Cliente(int id, std::string nome, std::string telefone, std::string endereco);
-        // virtual ~Cliente() {};
         
         int getId();
         std::string getNome();
@@ -24,7 +23,7 @@ class Cliente{
         void setTelefone(std::string telefone);
         void setEndereco(std::string endereco);
 
-        virtual void exibirInformacoes();
+        void exibirInformacoes();
 };
 
 #endif

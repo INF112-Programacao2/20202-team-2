@@ -3,12 +3,8 @@
 
 #include "cliente.h"
 
-Cliente::Cliente(int id, std::string nome, std::string telefone, std::string endereco){
-    _id = id;
-    _nome = nome;
-    _telefone = telefone;
-    _endereco = endereco;
-}
+Cliente::Cliente(int id, std::string nome, std::string telefone, std::string endereco) :
+    _id(id), _nome(nome), _telefone(telefone), _endereco(endereco) {}
 
 int Cliente::getId(){
     return _id;
