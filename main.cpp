@@ -328,8 +328,9 @@ int main() {
                             int codEstadoCivilCliente;
                             std::string estadoCivilCliente;
                             for (int i = 0; i<5; i++) std::cout << i << " - " << estadosCivis[i] << std::endl;
-                            std::cout << "Insira o estado civil: ";
-                            std::cin >> codEstadoCivilCliente;
+                            do{
+                                codEstadoCivilCliente = input_integer("Insira o código do estado civil: ", "Valor inválido.");
+                            } while (codEstadoCivilCliente < 0 || codEstadoCivilCliente > 4);
                             estadoCivilCliente = estadosCivis[codEstadoCivilCliente];
 
 
