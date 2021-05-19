@@ -13,8 +13,8 @@
 #include "estoque.h"
 #include "venda.h"
 #include "cliente.h"
-#include "clientePF.h"
-#include "clientePJ.h"
+#include "clientepf.h"
+#include "clientepj.h"
 
 int input_integer(std::string input_msg, std::string error_msg) {
      std::cout << input_msg;
