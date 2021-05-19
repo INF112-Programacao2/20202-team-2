@@ -51,10 +51,6 @@ int main() {
     veiculosIds++;
     Veiculo *v2 = new Carro(veiculosIds,"GWS-9104", 2014, "Chevrolet", "Onix 1.4", "Chumbo,", "Flex", 35490, 4, true, true, true, "Hidráulica");
     veiculosIds++;
-    //Veiculo *v3 = new Moto(veiculosIds.size() + 1, "OFK-2981", 2018, "Honda", "Bros", "Preto", "Flex", 12000, "A disco", "A disco", "Elétrica", "Eletrônica", 160);
-    //veiculosIds.push_back(veiculosIds.size() + 1);
-    //Veiculo *v4 = new Moto(veiculosIds.size() + 1, "HPW-3489", 2019, "Honda", "Titan", "Vermelho", "Flex", 12500, "A disco", "A disco", "Elétrica", "Eletrônica", 160);
-    //veiculosIds.push_back(veiculosIds.size() + 1);
 
     estoque.adicionar(v1, 1);
     estoque.adicionar(v2, 1);
@@ -553,7 +549,8 @@ int main() {
                     {
                         std::string model;
                         std::cout << "Digite o modelo do veículo: ";
-                        std::cin >> model;
+                        std::cin.ignore();
+                        std::getline(std::cin, model);
                         estoque.procurar(model);
                     }
                     break;
