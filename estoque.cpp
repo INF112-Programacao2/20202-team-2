@@ -81,6 +81,18 @@ void Estoque::procurar(std::string modelo){
 	}
 }
 
+Veiculo* Estoque::buscar(int id){
+	for (unsigned int i=0; i<_veiculos.size(); i++)
+	{
+		if (_veiculos[i].v->getId() == id)
+		{
+			return _veiculos[i].v;
+		}
+	}
+
+	return nullptr;
+}
+
 void Estoque::imprimir_estoque() {
 	if (_veiculos.size() == 0)
 		std::cout << "Estoque vazio." << std::endl;

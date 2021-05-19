@@ -3,6 +3,7 @@
 #include <vector>
 #include <string>
 #include <limits>
+#include <time.h>
 
 #include "funcionario.h"
 #include "gerente.h"
@@ -13,8 +14,8 @@
 #include "estoque.h"
 #include "venda.h"
 #include "cliente.h"
-#include "clientePF.h"
-#include "clientePJ.h"
+#include "clientepf.h"
+#include "clientepj.h"
 
 int input_integer(std::string input_msg, std::string error_msg) {
      std::cout << input_msg;
@@ -45,16 +46,17 @@ int main() {
     std::vector<ClientePF> clientesPF;
     std::vector<ClientePJ> clientesPJ;
     std::vector<Venda> vendas;
+    int veiculosIds = 1;
     
-    // Veiculo *v1 = new Carro(000,"HFG-3983", 2017, "Fiat", "Argo 1.0", "Vermelho", "Flex", 39990, 4, true, true, true, "Hidráulica");
-    // Veiculo *v2 = new Carro(001,"GWS-9104", 2014, "Chevrolet", "Onix 1.4", "Chumbo,", "Flex", 35490, 4, true, true, true, "Hidráulica");
-    // Veiculo *v3 = new Moto(002, "OFK-2981", 2018, "Honda", "Bros", "Preto", "Flex", 12000, "A disco", "A disco", "Elétrica", "Eletrônica", 160);
-    // Veiculo *v4 = new Moto(003, "HPW-3489", 2019, "Honda", "Titan", "Vermelho", "Flex", 12500, "A disco", "A disco", "Elétrica", "Eletrônica", 160);
+    Veiculo *v1 = new Carro(veiculosIds,"HFG-3983", 2017, "Fiat", "Argo 1.0", "Vermelho", "Flex", 39990, 4, true, true, true, "Hidráulica");
+    veiculosIds++;
+    Veiculo *v2 = new Carro(veiculosIds,"GWS-9104", 2014, "Chevrolet", "Onix 1.4", "Chumbo,", "Flex", 35490, 4, true, true, true, "Hidráulica");
+    veiculosIds++;
 
-    // estoque.adicionar(v1, 1);
-    // estoque.adicionar(v2, 1);
-    // estoque.adicionar(v3, 1);
-    // estoque.adicionar(v4, 1);
+    estoque.adicionar(v1, 1);
+    estoque.adicionar(v2, 1);
+    //estoque.adicionar(v3, 1);
+    //estoque.adicionar(v4, 1);
 
     // Cliente *c = new ClientePF(001, "Márcio Correa", "(31) 99745-3710", "Rua dos Estudantes, 290", "026.347.601-63", "20/08/1995", "Solteiro");
     // Venda venda1(f,c,v1,"14/05/2021",0,"Cartão de Crédito", 39990,"Nenhuma");
@@ -80,6 +82,7 @@ int main() {
     int menu_principal;
     int menu_interno;
     int id;
+    int id_v = 0;
     int tipo_funcionario = 0; // 1 - gerente || 2 - vendedor
     Funcionario *funcionario_sistema;
 
@@ -323,8 +326,9 @@ int main() {
                             int codEstadoCivilCliente;
                             std::string estadoCivilCliente;
                             for (int i = 0; i<5; i++) std::cout << i << " - " << estadosCivis[i] << std::endl;
-                            std::cout << "Insira o estado civil: ";
-                            std::cin >> codEstadoCivilCliente;
+                            do{
+                                codEstadoCivilCliente = input_integer("Insira o código do estado civil: ", "Valor inválido.");
+                            } while (codEstadoCivilCliente < 0 || codEstadoCivilCliente > 4);
                             estadoCivilCliente = estadosCivis[codEstadoCivilCliente];
 
 
@@ -366,7 +370,7 @@ int main() {
                             clientesPF[i].exibir_informacoes();
                             std::cout << (clientesPF.size() > 1 ? "---------------------------" : "") << std::endl;
                         }
-                    }
+                    } else std::cout << "Não há clientes pessoa física." << std::endl;
                     if (clientesPJ.size() > 0){
                         std::cout << std::endl << "===Clientes Pessoa Juridica===" << std::endl;
 
@@ -375,27 +379,29 @@ int main() {
                             clientesPJ[i].exibir_informacoes();
                             std::cout << (clientesPJ.size() > 1 ? "---------------------------" : "") << std::endl;
                         }
-                    }
+                    } else std::cout << "Não há clientes pessoa jurídica." << std::endl;
                     break;
                 case 3:
                     try{
                         std::cout << std::endl << "===Buscar Cliente===" << std::endl;
 
-                        std:: cout << "Informe o id do Cliente: ";
-                        std::cin >> id;
-
+                        id = input_integer("Informe o id do cliente: ", "Valor inválido.");
+                        bool clienteExiste = false;
                         for (unsigned int i = 0; i<clientesPF.size(); i++){
                             if (clientesPF[i].getId() == id){
                                 clientesPF[i].exibir_informacoes();
+                                clienteExiste = true;
                                 break;
                             }
                         }
                         for (unsigned int i = 0; i<clientesPJ.size(); i++){
                             if (clientesPJ[i].getId() == id){
                                 clientesPJ[i].exibir_informacoes();
+                                clienteExiste = true;
                                 break;
                             }
                         }  
+                        if (!clienteExiste) std::cout << "Esse cliente não existe." << std::endl;
                         break;
                     }catch(std::exception &e){
                         std::cout << "Ocorreu um erro ao buscar o cliente." << std::endl;
@@ -403,21 +409,24 @@ int main() {
                 case 4:
                     try{
                         std::cout << std::endl << "===Excluir Cliente===" << std::endl;
-                        std:: cout << "Informe o id do cliente: ";
-                        std::cin >> id;
+                        id = input_integer("Informe o id do cliente: ", "Valor inválido.");
+                        bool clienteExiste = false;
                         for (unsigned int i = 0; i<clientesPF.size(); i++){
                             if (clientesPF[i].getId() == id){
                                 clientesPF.erase(clientesPF.begin() + id);
+                                clienteExiste = true;
                                 break;
                             }
                         }
                         for (unsigned int i = 0; i<clientesPJ.size(); i++){
                             if (clientesPJ[i].getId() == id){
                                 clientesPJ.erase(clientesPJ.begin() + id);
+                                clienteExiste = true;
                                 break;
                             }
                         }
-                        std:: cout << "Cliente excluído com sucesso!" << std::endl;
+                        if (clienteExiste) std:: cout << "Cliente excluído com sucesso!" << std::endl;
+                        else std::cout << "Esse cliente não existe." << std::endl;
                         break;
                     }catch(std::exception &e){
                         std::cout << "Ocorreu um erro ao excluir o cliente." << std::endl;
@@ -452,7 +461,7 @@ int main() {
                         std::string placa, marca, modelo, cor, combustivel, tdirecao;
                         bool ac,ve,te;
 
-                        id = estoque.getNumVeiculos();
+                        id = veiculosIds;
                         std::cout << "Quantidade: ";
                         std::cin >> quantidade;
                         std::cout << "Ano: ";
@@ -481,6 +490,7 @@ int main() {
                         std::cin >> ve;
                         
                         Veiculo *v = new Carro(id, placa, ano, marca, modelo, cor, combustivel, preco, nportas, ac, ve, te, tdirecao);
+                        veiculosIds++;
                         estoque.adicionar(v, quantidade);
                     }
                     else
@@ -488,7 +498,7 @@ int main() {
                         int id, ano, preco, cilindradas, quantidade;
                         std::string placa, marca, modelo, cor, combustivel, fd, ft, partida, injecao;
 
-                        id = estoque.getNumVeiculos();
+                        id = veiculosIds;
                         
                         std::cout << "Quantidade: ";
                         std::cin >> quantidade;
@@ -518,6 +528,7 @@ int main() {
                         std::cin >> injecao;
                         
                         Veiculo *v = new Moto(id, placa, ano, marca, modelo, cor, combustivel, preco, fd, ft, partida, injecao, cilindradas);
+                        veiculosIds++;
                         estoque.adicionar(v, quantidade);
                     }
 
@@ -540,7 +551,8 @@ int main() {
                     {
                         std::string model;
                         std::cout << "Digite o modelo do veículo: ";
-                        std::cin >> model;
+                        std::cin.ignore();
+                        std::getline(std::cin, model);
                         estoque.procurar(model);
                     }
                     break;
@@ -574,6 +586,121 @@ int main() {
 
                 switch (menu_interno) {
                 case 1:
+                do{
+                        std::cout << "1 - Cadastrar Venda para Cliente Pessoa Física" << std::endl;
+                        std::cout << "2 - Cadastrar Venda para Cliente Pessoa Jurídica" << std::endl;
+                        std::cout << "0 - Cancelar" << std::endl;
+                        int tp, clientid, vehicleid;
+                        Veiculo *veiculo_vendido;
+                        Cliente *cliente_atendido;
+                        int dia, mes, ano;
+                        std::string data, formapg, obs;
+                        double desconto, valorfinal;
+                        tp = input_integer("Insira uma opção: ", "É necessário inserir um número!");
+                        if (tp == 1)
+                        {
+                            std::cout << "Digite o id do Cliente Pessoa Física: ";
+                            std::cin >> clientid;
+                            bool found = false;
+
+                            for(unsigned int i=0; i<clientesPF.size(); i++)
+                            {
+                                if (clientesPF[i].getId() == clientid)
+                                {
+                                    cliente_atendido = new ClientePF(clientesPF[i]);
+                                    found = true;
+                                }
+                            }
+                            if (found == false)
+                            {
+                                std::cout << "Não existe Cliente PF com esse id." << std::endl;
+                                break;
+                            }
+                            std::cout << "Digite o id do Veículo vendido: ";
+                            std::cin >> vehicleid;
+                            veiculo_vendido = estoque.buscar(vehicleid);
+                            if (veiculo_vendido == nullptr)
+                            {
+                                std::cout << "Não existe nenhum veículo com esse id no estoque.";
+                                break;
+                            }
+                            std::cout << "Digite o desconto: ";
+                            std::cin >> desconto;
+                            std::cout << "Digite a forma de pagamento utilizada: ";
+                            std::cin.ignore();
+                            std::getline(std::cin, formapg);
+                            std::cout <<"Alguma observação?: ";
+                            std::cin.ignore();
+                            std::getline(std::cin, obs);
+
+                            struct tm *data_hora;      
+                            time_t segundos;
+                            time(&segundos);   
+                            data_hora = localtime(&segundos);
+                            dia = data_hora->tm_mday;
+                            mes = data_hora->tm_mon+1;
+                            ano = data_hora->tm_year+1900;
+
+                            data = (std::to_string(dia)) + '/' + (std::to_string(mes)) + '/' + (std::to_string(ano));
+                            valorfinal = veiculo_vendido->getPreco() - desconto;
+                            Venda venda(id_v, funcionario_sistema, cliente_atendido, veiculo_vendido, data, desconto, formapg, valorfinal, obs);
+                            venda.salvar_venda();
+                            estoque.remover(veiculo_vendido, 1);
+                        }
+                        else if (tp == 2)
+                        {
+                            std::cout << "Digite o id do Cliente Pessoa Jurídica: ";
+                            std::cin >> clientid;
+                            bool found = false;
+
+                            for(unsigned int i=0; i<clientesPJ.size(); i++)
+                            {
+                                if (clientesPJ[i].getId() == clientid)
+                                {
+                                    cliente_atendido = new ClientePJ(clientesPJ[i]);
+                                    found = true;
+                                }
+                            }
+                            if (found == false)
+                            {
+                                std::cout << "Não existe Cliente PJ com esse id." << std::endl;
+                                break;
+                            }
+                            std::cout << "Digite o id do Veículo vendido: ";
+                            std::cin >> vehicleid;
+                            veiculo_vendido = estoque.buscar(vehicleid);
+                            if (veiculo_vendido == nullptr)
+                            {
+                                std::cout << "Não existe nenhum veículo com esse id no estoque.";
+                                break;
+                            }
+                            std::cout << "Digite o desconto: ";
+                            std::cin >> desconto;
+                            std::cout << "Digite a forma de pagamento utilizada: ";
+                            std::cin.ignore();
+                            std::getline(std::cin, formapg);
+                            std::cout <<"Alguma observação?: ";
+                            std::cin.ignore();
+                            std::getline(std::cin, obs);
+
+                            struct tm *data_hora;      
+                            time_t segundos;
+                            time(&segundos);   
+                            data_hora = localtime(&segundos);
+                            dia = data_hora->tm_mday;
+                            mes = data_hora->tm_mon+1;
+                            ano = data_hora->tm_year+1900;
+
+                            data = (std::to_string(dia)) + '/' + (std::to_string(mes)) + '/' + (std::to_string(ano));
+                            valorfinal = veiculo_vendido->getPreco() - desconto;
+                            Venda venda(id_v, funcionario_sistema, cliente_atendido, veiculo_vendido, data, desconto, formapg, valorfinal, obs);
+                            venda.salvar_venda();
+                            estoque.remover(veiculo_vendido, 1);
+                        }
+                        else{
+                            break;
+                        }
+                    }while(true);
                     break;
                 case 2:{
                     if (vendas.size() == 0)

@@ -24,6 +24,7 @@ public:
 	void imprimir_estoque();
 	void procurar(int id);
 	void procurar(std::string modelo);
+	Veiculo* buscar(int id);
 	int getNumVeiculos();
 	};
 
