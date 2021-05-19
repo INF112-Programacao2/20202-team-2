@@ -181,11 +181,13 @@ int main() {
                 case 3:
                     std::cout << std::endl << "===Buscar Funcionário===" << std::endl;
                     try {
-
                         std::cout << "Informe o id do Funcionário: ";
                         std::cin >> id;
+                        bool verifica_busca = false;
+
                         for(Gerente gerente:gerentes){
                             if(gerente.getId() == id){
+                                verifica_busca = true;
                                 std::cout << "NOME: " << gerente.getNome() << std::endl;
                                 std::cout << "CPF: " << gerente.getCpf() << std::endl;
                                 std::cout << "TELEFONE: " << gerente.getTelefone() << std::endl;
@@ -196,6 +198,7 @@ int main() {
                         }
                         for(Vendedor vendedor:vendedores){
                             if(vendedor.getId() == id){
+                                verifica_busca = true;
                                 std::cout << "NOME: " << vendedor.getNome() << std::endl;
                                 std::cout << "CPF: " << vendedor.getCpf() << std::endl;
                                 std::cout << "TELEFONE: " << vendedor.getTelefone() << std::endl;
@@ -204,6 +207,8 @@ int main() {
                                 std::cout << "CONTA: " << vendedor.getConta() << std::endl;
                             }
                         }
+                        if(verifica_busca == false)
+                            throw std::exception();
                     } catch (std::exception &e){
                         std::cout << "Ocorreu um erro ao buscar funcionário" << std::endl;
                     }
@@ -213,19 +218,21 @@ int main() {
                     try{
                         std:: cout << "Informe o id do Funcionário: ";
                         std::cin >> id;
-                        if((funcionarios.begin() + id-1) < funcionarios.end()){
+                        bool verifica_delecao = false;
                             for(unsigned int i = 0; i < vendedores.size(); i++)
                                 if(vendedores[i].getId() == id){
                                     vendedores.erase(vendedores.begin() + i);
+                                    verifica_delecao = true;
                                 }
                             for(unsigned int i = 0; i < gerentes.size(); i++)
                                 if(gerentes[i].getId() == id){
                                     gerentes.erase(gerentes.begin() + i);
+                                    verifica_delecao = true;
                                 }
+                        if(verifica_delecao == true)
                             std:: cout << "Funcionário excluído com sucesso!" << std::endl;
-                        } else {
+                        else
                             throw std::exception();
-                        }
                     } catch (std::exception &e){
                         std::cout << "Ocorreu um erro ao excluir funcionário" << std::endl;
                     }
