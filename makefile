@@ -44,3 +44,6 @@ venda.o: venda.h venda.cpp
 
 clean:
 	rm -f main *.o *.txt
+
+run: 
+	./main
