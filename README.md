@@ -25,6 +25,21 @@ O tema escolhido pelo grupo para a realização do trabalho foi um Sistema de Co
 - Venda
 - Estoque de Veículos
 
+## User Stories
+ - Como ‘Gerente’ quero cadastrar meus funcionários no meu estabelecimento, para que eu tenha pessoas trabalhando nelas;
+
+ - Como ‘Gerente’ quero cadastrar os veículos que serão vendidos, para que eu tenha o que vender no estabelecimento;
+
+ - Como ‘Gerente’ quero cadastrar os clientes associados ao estabelecimento, para que eu tenha um maior controle;
+
+ - Como ‘Gerente’ quero cadastrar cada venda que eu realizar, para que eu tenha maior controle sobre as finanças;
+
+ - Como ‘Funcionário’ quero cadastrar cada venda que eu realizar, para que eu tenha maior controle sobre as finanças;
+ 
+ - Como ‘Funcionário’ quero cadastrar os veículos que serão vendidos, para que eu tenha o que vender no estabelecimento;
+
+ - Como ‘Funcionário’ quero cadastrar os clientes associados ao estabelecimento, para que eu tenha um maior controle;
+
 ## Como executar
  Na pasta do projeto:
  - Execute *make*;
